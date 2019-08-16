@@ -20,13 +20,13 @@ db = connect(**{'host': '47.94.94.136', 'port': 3306,
 #     return render_template("index.html", title="Home")
 
 
-@app.route('/login', methods=['POST'])
+@app.route('/login', methods=['POST'])  # 用电话号码或邮箱登录，不能用用户名登录，因为用户名不唯一
 def login():
-    value = request.form['user']
-    if re.match(r'^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$', value):
+    value = request.form['user']    # 获取电话号码或邮箱
+    if re.match(r'^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$', value):   # 判断是否为邮箱
         key = 'email'
         value = "'%s'" % value  # 在 value 两边加上引号
-    elif re.match(r'^(?:\+?86)?1(?:3\d{3}|5[^4\D]\d{2}|8\d{3}|7(?:[01356789]\d{2}|4(?:0\d|1[0-2]|9\d))|9[189]\d{2}|6[567]\d{2}|4[579]\d{2})\d{6}$', value):
+    elif re.match(r'^(?:\+?86)?1(?:3\d{3}|5[^4\D]\d{2}|8\d{3}|7(?:[01356789]\d{2}|4(?:0\d|1[0-2]|9\d))|9[189]\d{2}|6[567]\d{2}|4[579]\d{2})\d{6}$', value): # 判断是否为电话号码
         key = 'phone_number'
     else:
         return json.dumps({'isSuccess': False, 'msg': '请输入邮箱或手机号'}, ensure_ascii=False)
@@ -48,7 +48,7 @@ def login():
         return json.dumps({'isSuccess': False, 'msg': '密码错误'}, ensure_ascii=False)
 
 
-@app.route('/register', methods=['POST'])
+@app.route('/register', methods=['POST'])   # 用邮箱注册
 def register():
     try:
         email = re.match(

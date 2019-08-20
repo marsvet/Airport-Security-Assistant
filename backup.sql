@@ -166,8 +166,11 @@ DROP TABLE IF EXISTS `admin`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `admin` (
   `admin_id` int(11) NOT NULL AUTO_INCREMENT,
-  `admin_name` varchar(20) CHARACTER SET utf8 NOT NULL DEFAULT '未命名管理员',
-  `passwd` varchar(30) CHARACTER SET utf8 NOT NULL DEFAULT '111111',
+  `admin_name` varchar(20) CHARACTER SET utf8 NOT NULL,
+  `passwd` varchar(200) CHARACTER SET utf8 NOT NULL,
+  `phone_number` decimal(13,0) DEFAULT NULL,
+  `email` varchar(50) DEFAULT NULL,
+  `ID_card` varchar(18) DEFAULT NULL,
   PRIMARY KEY (`admin_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -178,7 +181,7 @@ CREATE TABLE `admin` (
 
 LOCK TABLES `admin` WRITE;
 /*!40000 ALTER TABLE `admin` DISABLE KEYS */;
-INSERT INTO `admin` VALUES (1,'王老师','123'),(2,'王子泓','123'),(3,'马涛','123'),(4,'郑清沁','123'),(5,'刘鑫哲','123');
+INSERT INTO `admin` VALUES (1,'王老师','123',NULL,NULL,NULL),(2,'王子泓','123',NULL,NULL,NULL),(3,'马涛','123',NULL,NULL,NULL),(4,'郑清沁','123',NULL,NULL,NULL),(5,'刘鑫哲','123',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `admin` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -218,13 +221,13 @@ DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `users` (
-  `user_id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_name` varchar(30) CHARACTER SET utf8 NOT NULL,
-  `passed` varchar(20) CHARACTER SET utf8 NOT NULL DEFAULT '123',
-  `phone_number` decimal(13,0) NOT NULL,
-  `email` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
+  `user_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `user_name` varchar(30) CHARACTER SET utf8 NOT NULL DEFAULT '无昵称',
+  `passwd` varchar(200) CHARACTER SET utf8 NOT NULL,
+  `phone_number` decimal(13,0) DEFAULT NULL,
+  `email` varchar(50) CHARACTER SET utf8 NOT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -246,4 +249,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-08-13  0:09:17
+-- Dump completed on 2019-08-17 11:16:17

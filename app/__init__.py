@@ -1,6 +1,25 @@
-from flask import Flask		# 导入 Flask 类
+from flask import Flask
+from config import Config
+from pymysql import connect
+from flask_login import LoginManager
+from flask_mail import Mail
 
-app = Flask(__name__)		# 创建 app 对象
-app.config.from_object("config")	# 指定要读取的配置文件的文件名
+config = Config()
+db = connect(**config.pymysql_config)
+login_manager = LoginManager()
+login_manager.login_view = 'auth.login'
+mail = Mail()
 
-from app import views		# 导入 views 模块
+def create_app():
+	app = Flask(__name__)
+	app.config.from_object(config)
+	config.init_app(app)
+	login_manager.init_app(app)
+	mail.init_app(app)
+
+	from .main import main as main_blueprint
+	app.register_blueprint(main_blueprint)
+	from .auth import auth as auth_blueprint
+	app.register_blueprint(auth_blueprint)
+
+	return app

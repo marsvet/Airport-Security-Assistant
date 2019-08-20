@@ -8,10 +8,12 @@ verify_ssl = true
 [packages]
 flask = "*"
 flask-wtf = "*"
-flask-sqlalchemy = "*"
 autopep8 = "*"
 pylint = "*"
 pymysql = "*"
+flask-bootstrap = "*"
+flask-login = "*"
+flask-mail = "*"
 
 [requires]
 python_version = "3.7"

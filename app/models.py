@@ -5,6 +5,7 @@ from . import db, login_manager
 
 class User(UserMixin):
     def __init__(self):
+        db.ping(reconnect=True)
         self.cursor = db.cursor()
         self.__set_attr(0)
 

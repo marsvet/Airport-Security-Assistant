@@ -10,16 +10,17 @@ import random
 # prepare for Andriod APP
 @auth.route('/login', methods=['POST'])  # 用电话号码或邮箱登录，不能用用户名登录，因为用户名不唯一
 def login():
-    value = request.form['user']    # 获取电话号码或邮箱
-    password = request.form['password']
-    if re.match(r'^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$', value):   # 判断是否为邮箱
+    data = request.get_json()
+    email_or_phone = data['user']    # 获取电话号码或邮箱
+    password = data['password']
+    if re.match(r'^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$', email_or_phone):   # 判断是否为邮箱
         key = 'email'
-    elif re.match(r'^(?:\+?86)?1(?:3\d{3}|5[^4\D]\d{2}|8\d{3}|7(?:[01356789]\d{2}|4(?:0\d|1[0-2]|9\d))|9[189]\d{2}|6[567]\d{2}|4[579]\d{2})\d{6}$', value):  # 判断是否为电话号码
+    elif re.match(r'^(?:\+?86)?1(?:3\d{3}|5[^4\D]\d{2}|8\d{3}|7(?:[01356789]\d{2}|4(?:0\d|1[0-2]|9\d))|9[189]\d{2}|6[567]\d{2}|4[579]\d{2})\d{6}$', email_or_phone):  # 判断是否为电话号码
         key = 'phone_number'
     else:
         return jsonify({'isSuccess': False, 'msg': '请输入邮箱或手机号'})
     user = User()
-    if not user.get_user(key, value):
+    if not user.get_user(key, email_or_phone):
         return jsonify({'isSuccess': False, 'msg': '您还未注册'})
     if not 6 <= len(password) <= 20:
         return jsonify({'isSuccess': False, 'msg': '密码长度必须在 6 ~ 20 之间'})
@@ -34,15 +35,16 @@ def login():
 # prepare for Andriod APP
 @auth.route('/register', methods=['POST'])   # 用邮箱注册
 def register():
+    data = request.get_json()
     try:
         email = re.match(
-            r'^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$', request.form['email']).group()
+            r'^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$', data['email']).group()
     except:
         return jsonify({'isSuccess': False, 'msg': '电子邮件格式不正确'})
     user = User()
     if user.get_user("email", email) > 0:
         return jsonify({'isSuccess': False, 'msg': '该邮箱已被注册'})
-    password = request.form['password']
+    password = data['password']
     if not 6 <= len(password) <= 20:
         return jsonify({'isSuccess': False, 'msg': '密码长度必须在 6 ~ 20 之间'})
     if not re.match(r'^\w{6,20}$', password):

@@ -14,9 +14,9 @@ class User(UserMixin):
 
     def __set_attr(self, count):
         if count:
-            self.user_id, self.username, self.password_hash, self.phone_number, self.email = self.cursor.fetchone()
+            self.id, self.username, self.password_hash, self.phone_number, self.email = self.cursor.fetchone()
         else:
-            self.user_id, self.username, self.password_hash, self.phone_number, self.email = (
+            self.id, self.username, self.password_hash, self.phone_number, self.email = (
                 None,) * 5
 
     def get_user(self, key, value):
@@ -28,10 +28,10 @@ class User(UserMixin):
         self.__set_attr(count)
         return count
 
-    def add_user(self, email, password):
+    def add_user(self, email, password, phone_number="null", username="无昵称"):
         password_hash = generate_password_hash(password)
-        sql = "insert into users values(null, '无昵称', '%s', null, '%s')" % (
-            password_hash, email)
+        sql = "insert into users values(null, '%s', '%s', %s, '%s')" % (username,
+                                                                        password_hash, phone_number, email)
         count = self.cursor.execute(sql)
         self.__set_attr(0)
         db.commit()

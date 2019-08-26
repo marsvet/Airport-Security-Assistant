@@ -1,7 +1,7 @@
 from flask import render_template, flash, redirect, request, url_for, jsonify
 from flask_login import login_user
 from . import auth
-from .forms import LoginForm
+from .forms import LoginForm, RegisterForm
 from ..models import User
 import re
 import random
@@ -18,7 +18,7 @@ def login():
     elif re.match(r'^(?:\+?86)?1(?:3\d{3}|5[^4\D]\d{2}|8\d{3}|7(?:[01356789]\d{2}|4(?:0\d|1[0-2]|9\d))|9[189]\d{2}|6[567]\d{2}|4[579]\d{2})\d{6}$', email_or_phone):  # 判断是否为电话号码
         key = 'phone_number'
     else:
-        return jsonify({'isSuccess': False, 'msg': '请输入邮箱或手机号'})
+        return jsonify({'isSuccess': False, 'msg': '请输入邮箱或手机号码'})
     user = User()
     if not user.get_user(key, email_or_phone):
         return jsonify({'isSuccess': False, 'msg': '您还未注册'})
@@ -60,11 +60,38 @@ def _login():
     form = LoginForm()
     if form.validate_on_submit():
         user = User()
-        if user.get_user("email", form.email.data):
-            login_user(user, form.remember_me.data)
-            next = request.args.get('next')
-            if next is None or not next.startswith('/'):
-                next = url_for('main.index')
-            return redirect(next)
-        flash('Invalid email or password.')
+        try:
+            assert user.get_user("email", form.account.data)
+        except:
+            try:
+                assert user.get_user("phone_number", form.account.data)
+            except:
+                flash('您还未注册')
+                return redirect('/_login')
+        if not user.verify_password(form.password.data):
+            flash('密码错误')
+            return redirect('/_login')
+        login_user(user, form.remember_me.data)
+        next = request.args.get('next')
+        if next is None or not next.startswith('/'):
+            next = url_for('main.index')
+        return redirect(next)
     return render_template('login.html', form=form)
+
+
+@auth.route('/_register', methods=['GET', 'POST'])
+def _register():
+    form = RegisterForm()
+    if form.validate_on_submit():
+        phone_number = form.phone_number.data
+        nickname = form.nickname.data
+        if not phone_number:
+            phone_number = "null"
+        if not nickname:
+            nickname = "无昵称"
+        user = User()
+        user.add_user(form.email.data, form.password.data,
+                      phone_number, nickname)
+        flash('注册成功，请登录')
+        return redirect('/_login')
+    return render_template('register.html', form=form)

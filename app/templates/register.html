@@ -1,0 +1,99 @@
+{% extends "base.html" %} {% block title %}新用户注册{% endblock %} {% block
+inner_css %}
+
+<style>
+	#main {
+		padding-top: 30px;
+		margin: 30px 10%;
+	}
+
+	#main > h1 {
+		margin-left: 30px;
+		padding-bottom: 30px;
+		border-bottom: 1px solid rgba(128, 128, 128, 0.281);
+	}
+
+	#login-form {
+		padding: 30px 50px;
+	}
+
+	#login-form .control-label {
+		font-weight: bold;
+	}
+
+	#login-form .form-control {
+		margin-bottom: 20px;
+	}
+
+	#submit {
+		margin: 20px auto 20px auto;
+		position: relative;
+		top: 30px;
+	}
+
+	#login-form p {
+		position: relative;
+		top: 20px;
+		font-size: 0.9em;
+		text-align: center;
+	}
+
+	.error-message {
+		font-size: 0.9em;
+		color: red;
+		display: block;
+		position: relative;
+		top: -12px;
+	}
+
+	@media (max-width: 600px) {
+		#main {
+			margin: 50px 20px;
+		}
+		#main > h1 {
+			margin: 0;
+		}
+
+		#login-form {
+			padding: 30px 20px;
+		}
+	}
+</style>
+
+{% endblock %} {% block main_content %} {% include "header.html" %}
+
+{% if get_flashed_messages()[0] %}
+	<div class="alert alert-warning">
+		<button type="button" class="close" data-dismiss="alert">&times;</button>
+		{{ get_flashed_messages()[0] }}
+	</div>
+{% endif %}
+
+<div id="main">
+	<h1>注册</h1>
+	<div id="login-form" class="col-md-5">
+		<form method="POST">
+			{{ form.hidden_tag() }}
+			{{ form.email.label(class='control-label')
+			}}<span class="text-danger">*</span>{{ form.email(class='form-control') }}
+			<span class="error-message">{{ form.email.errors[0] }}</span>
+			{{ form.password.label(class='control-label')
+			}}<span class="text-danger">*</span
+			>{{ form.password(class="form-control") }}
+			<span class="error-message">{{ form.password.errors[0] }}</span>
+			{{ form.check_password.label(class='control-label')
+			}}<span class="text-danger">*</span
+			>{{ form.check_password(class="form-control") }}
+			<span class="error-message">{{ form.check_password.errors[0] }}</span>
+			{{ form.phone_number.label(class='control-label')
+			}}{{ form.phone_number(class='form-control') }}
+			<span class="error-message">{{ form.phone_number.errors[0] }}</span>
+			{{ form.nickname.label(class='control-label')
+			}}{{ form.nickname(class='form-control') }}
+			<span class="error-message">{{ form.nickname.errors[0] }}</span>
+			{{ form.submit(class='btn btn-block btn-primary', id='submit') }}
+		</form>
+		<p>已经注册？<a href="_login">点此登录</a></p>
+	</div>
+</div>
+{% endblock %}

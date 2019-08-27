@@ -1,5 +1,5 @@
 from flask import render_template, flash, redirect, request, url_for, jsonify
-from flask_login import login_user
+from flask_login import login_user, logout_user
 from . import auth
 from .forms import LoginForm, RegisterForm
 from ..models import User
@@ -76,7 +76,7 @@ def _login():
         if next is None or not next.startswith('/'):
             next = url_for('main.index')
         return redirect(next)
-    return render_template('login.html', form=form)
+    return render_template('login.html', form=form, title="用户登录")
 
 
 @auth.route('/_register', methods=['GET', 'POST'])
@@ -94,4 +94,11 @@ def _register():
                       phone_number, nickname)
         flash('注册成功，请登录')
         return redirect('/_login')
-    return render_template('register.html', form=form)
+    return render_template('register.html', form=form, title="新用户注册")
+
+
+@auth.route('/_logout')
+def _logout():
+    logout_user()
+    flash('账号已退出')
+    return redirect(url_for('auth._login'))

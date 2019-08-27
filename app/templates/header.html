@@ -32,7 +32,26 @@
 
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav ml-auto text-center mr-xl-5 mt-lg-0 mt-3">
-				<li class="nav-item active mr-lg-2 mb-lg-0 mb-2">
+				{% if request.endpoint == 'auth._login' %}
+				<li class="nav-item">
+					<a
+						class="nav-link"
+						href="/_register"
+						style="color: black; background-color: rgb(0, 238, 255);"
+						>注册</a
+					>
+				</li>
+				{% elif request.endpoint == 'auth._register'%}
+				<li class="nav-item">
+					<a
+						class="nav-link"
+						href="/_login"
+						style="color: black; background-color: rgb(0, 238, 255);"
+						>登录</a
+					>
+				</li>
+				{% else %}
+				<li class="nav-item active">
 					<a class="nav-link" href="/">首页 </a>
 				</li>
 
@@ -53,14 +72,27 @@
 				<li class="nav-item">
 					<a class="nav-link" href="/survey">满意度调查</a>
 				</li>
-				<li class="nav-item">
+				<li class="nav-item" id="user_info">
 					<a
-						class="nav-link"
-						href="/_login"
-						style="color: black; background-color: rgb(0, 238, 255);"
-						>登录</a
+						class="nav-link dropdown-toggle"
+						href="#"
+						id="navbarDropdown"
+						role="button"
+						data-toggle="dropdown"
+						aria-haspopup="true"
+						aria-expanded="false"
+						style="color: white; background-color: #6c5ce7;"
 					>
+						{{ current_user.username }}
+					</a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<a class="dropdown-item" href="/_user_info">个人信息</a>
+						<a class="dropdown-item" href="/_new_password">修改密码</a>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" href="/_logout">退出账号</a>
+					</div>
 				</li>
+				{% endif %}
 			</ul>
 		</div>
 	</nav>

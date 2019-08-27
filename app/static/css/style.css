@@ -911,3 +911,20 @@ p.copy-right-grids a:hover {
 	height: 120px;
 	width: 120px;
 }
+
+#user_info > div {
+	position: absolute;
+	left: 88%;
+}
+
+@media (max-width: 600px) {
+	#navbarSupportedContent > ul > li {
+		line-height: 0;
+	}
+	#user_info > div {
+		position: absolute;
+		right: 0;
+		left: 0;
+		line-height: 1.2;
+	}
+}

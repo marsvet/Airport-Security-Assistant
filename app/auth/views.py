@@ -1,11 +1,22 @@
 from flask import render_template, flash, redirect, request, url_for, jsonify
 from flask_login import login_user, logout_user
+from werkzeug.security import generate_password_hash, check_password_hash
 from . import auth
 from .forms import LoginForm, RegisterForm
 from ..models import User
+from ..email import send_email
 import re
 import random
 
+
+# prepare for Andriod APP
+@auth.route('/verify_email', methods=['POST'])
+def verify_email():
+    email = request.get_json()['email']
+    verification_code = random.randint(100000, 999999)
+    send_email(email, '验证邮箱', 'mail/verify_email',
+               verification_code=verification_code)
+    return jsonify({'verification_code': verification_code})
 
 # prepare for Andriod APP
 @auth.route('/login', methods=['POST'])  # 用电话号码或邮箱登录，不能用用户名登录，因为用户名不唯一
@@ -55,6 +66,16 @@ def register():
 
 
 # prepare for web
+@auth.route('/_verify_email', methods=['POST'])
+def _verify_email():
+    email = request.form['email']
+    verification_code = random.randint(100000, 999999)
+    send_email(email, '验证邮箱', 'mail/verify_email',
+               verification_code=verification_code)
+    return generate_password_hash(str(verification_code))
+
+
+# prepare for web
 @auth.route('/_login', methods=['GET', 'POST'])
 def _login():
     form = LoginForm()
@@ -83,6 +104,9 @@ def _login():
 def _register():
     form = RegisterForm()
     if form.validate_on_submit():
+        if not check_password_hash(form.hidden_verification_code_hash.data, form.verification_code.data):
+            flash('验证码错误')
+            return redirect('_register')
         phone_number = form.phone_number.data
         nickname = form.nickname.data
         if not phone_number:

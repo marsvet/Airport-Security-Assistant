@@ -63,7 +63,7 @@ inner_css %}
 {% endblock %} {% block main_content %} {% include "header.html" %}
 
 {% if get_flashed_messages()[0] %}
-	<div class="alert alert-warning">
+	<div class="alert alert-warning" style="text-align: center;">
 		<button type="button" class="close" data-dismiss="alert">&times;</button>
 		{{ get_flashed_messages()[0] }}
 	</div>

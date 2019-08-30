@@ -60,13 +60,27 @@ inner_css %}
 	}
 </style>
 
-{% endblock %} {% block main_content %} {% include "header.html" %}
+{% endblock %} {% block inner_script %}
 
-{% if get_flashed_messages()[0] %}
-	<div class="alert alert-warning">
-		<button type="button" class="close" data-dismiss="alert">&times;</button>
-		{{ get_flashed_messages()[0] }}
-	</div>
+<script>
+	function verify_email() {
+		_email = $("#email").val();
+		if (_email) {
+			$.post("/_verify_email", { email: _email }, data => {
+				$("#verify_email_button").html("发送成功");
+				$("#verify_email_button").attr("disabled", "true");
+				$("#hidden_verification_code_hash").val(data);
+			});
+		}
+	}
+</script>
+
+{% endblock %} {% block main_content %} {% include "header.html" %} {% if
+get_flashed_messages()[0] %}
+<div class="alert alert-warning">
+	<button type="button" class="close" data-dismiss="alert">&times;</button>
+	{{ get_flashed_messages()[0] }}
+</div>
 {% endif %}
 
 <div id="main">
@@ -75,8 +89,24 @@ inner_css %}
 		<form method="POST">
 			{{ form.hidden_tag() }}
 			{{ form.email.label(class='control-label')
-			}}<span class="text-danger">*</span>{{ form.email(class='form-control') }}
+			}}<span class="text-danger">*</span>{{ form.email(class='form-control', id='email') }}
 			<span class="error-message">{{ form.email.errors[0] }}</span>
+			{{ form.verification_code.label(class='control-label') }}
+			<div class="row">
+				<div class="col-8">
+					{{ form.verification_code(class='form-control') }}
+				</div>
+				<div class="col-4 offest-1">
+					<button
+						type="button"
+						id="verify_email_button"
+						class="btn btn-dark"
+						onclick="verify_email()"
+					>
+						发送验证码
+					</button>
+				</div>
+			</div>
 			{{ form.password.label(class='control-label')
 			}}<span class="text-danger">*</span
 			>{{ form.password(class="form-control") }}
@@ -88,10 +118,10 @@ inner_css %}
 			{{ form.phone_number.label(class='control-label')
 			}}{{ form.phone_number(class='form-control') }}
 			<span class="error-message">{{ form.phone_number.errors[0] }}</span>
-			{{ form.nickname.label(class='control-label')
-			}}{{ form.nickname(class='form-control') }}
+			{{ form.nickname.label(class='control-label')}}{{ form.nickname(class='form-control') }}
 			<span class="error-message">{{ form.nickname.errors[0] }}</span>
 			{{ form.submit(class='btn btn-block btn-primary', id='submit') }}
+			{{ form.hidden_verification_code_hash(style="display: none;") }}
 		</form>
 		<p>已经注册？<a href="_login">点此登录</a></p>
 	</div>

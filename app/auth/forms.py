@@ -17,6 +17,8 @@ class LoginForm(FlaskForm):
 class RegisterForm(FlaskForm):
     email = StringField('邮箱', validators=[DataRequired('请输入邮箱'), Regexp(
         r'^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$', 0, '邮箱格式不正确')])
+    verification_code = StringField('验证码', validators=[DataRequired('请输入验证码')])
+    hidden_verification_code_hash = StringField()
     password = PasswordField('密码', validators=[DataRequired('请输入密码'), Length(
         6, 20, '密码长度必须在 6 ~ 20 之间'), Regexp(r'^\w{6,20}$', 0, '密码必须由字母、数字、下划线组成')])
     check_password = PasswordField(

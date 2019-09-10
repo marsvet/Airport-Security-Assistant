@@ -46,3 +46,25 @@ def load_user(user_id):
     user = User()
     user.get_user("user_id", user_id)
     return user
+
+
+class Res():
+    def __init__(self):
+        db.ping(reconnect=True)
+        self.cursor = db.cursor()
+
+    def __del__(self):
+        self.cursor.close()
+
+    def __set_attr(self, count):
+        if count:
+            self.res_name, self.description, self.limit, self.carry_method, self.res_class = self.cursor.fetchone()
+        else:
+            self.res_name, self.description, self.limit, self.carry_method, self.res_class = (
+                None,) * 5
+
+    def get_res_info_by_resname(self, name):
+        sql = "select * from 物品信息 where 物品名称 = '%s'" % name
+        count = self.cursor.execute(sql)
+        self.__set_attr(count)
+        return count

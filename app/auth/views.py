@@ -9,16 +9,21 @@ import re
 import random
 
 
-# prepare for Andriod APP
+######## prepare for Andriod APP ########
+
 @auth.route('/verify_email', methods=['POST'])
 def verify_email():
-    email = request.get_json()['email']
+    try:
+        email = re.match(
+            r'^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$', request.get_json()['email']).group()
+    except:
+        return jsonify({'isSuccess': False, 'msg': '电子邮件格式不正确'})
     verification_code = random.randint(100000, 999999)
     send_email(email, '验证邮箱', 'mail/verify_email',
                verification_code=verification_code)
     return jsonify({'verification_code': verification_code})
 
-# prepare for Andriod APP
+
 @auth.route('/login', methods=['POST'])  # 用电话号码或邮箱登录，不能用用户名登录，因为用户名不唯一
 def login():
     data = request.get_json()
@@ -43,7 +48,6 @@ def login():
         return jsonify({'isSuccess': True})
 
 
-# prepare for Andriod APP
 @auth.route('/register', methods=['POST'])   # 用邮箱注册
 def register():
     data = request.get_json()
@@ -64,8 +68,10 @@ def register():
         return jsonify({'isSuccess': False, 'msg': '系统内部错误'})
     return jsonify({'isSuccess': True})
 
+######## prepare for Andriod APP ########
 
-# prepare for web
+
+######## prepare for Web ########
 @auth.route('/_verify_email', methods=['POST'])
 def _verify_email():
     email = request.form['email']
@@ -75,7 +81,6 @@ def _verify_email():
     return generate_password_hash(str(verification_code))
 
 
-# prepare for web
 @auth.route('/_login', methods=['GET', 'POST'])
 def _login():
     form = LoginForm()
@@ -126,3 +131,5 @@ def _logout():
     logout_user()
     flash('账号已退出')
     return redirect(url_for('auth._login'))
+
+######## prepare for Web ########

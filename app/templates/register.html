@@ -66,11 +66,15 @@ inner_css %}
 	function verify_email() {
 		_email = $("#email").val();
 		if (_email) {
-			$.post("/_verify_email", { email: _email }, data => {
-				$("#verify_email_button").html("发送成功");
-				$("#verify_email_button").attr("disabled", "true");
-				$("#hidden_verification_code_hash").val(data);
-			});
+			if (_email.match(/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/)) {
+				$.post("/_verify_email", { email: _email }, data => {
+					$("#verify_email_button").html("发送成功");
+					$("#verify_email_button").attr("disabled", "true");
+					$("#hidden_verification_code_hash").val(data);
+				});
+			} else {
+				$("#email+span").html("邮箱格式不正确");
+			}
 		}
 	}
 </script>
@@ -89,7 +93,10 @@ get_flashed_messages()[0] %}
 		<form method="POST">
 			{{ form.hidden_tag() }}
 			{{ form.email.label(class='control-label')
-			}}<span class="text-danger">*</span>{{ form.email(class='form-control', id='email') }}
+
+
+			}}<span class="text-danger">*</span
+			>{{ form.email(class='form-control', id='email') }}
 			<span class="error-message">{{ form.email.errors[0] }}</span>
 			{{ form.verification_code.label(class='control-label') }}
 			<div class="row">
@@ -108,17 +115,25 @@ get_flashed_messages()[0] %}
 				</div>
 			</div>
 			{{ form.password.label(class='control-label')
+
+
 			}}<span class="text-danger">*</span
 			>{{ form.password(class="form-control") }}
 			<span class="error-message">{{ form.password.errors[0] }}</span>
 			{{ form.check_password.label(class='control-label')
+
+
 			}}<span class="text-danger">*</span
 			>{{ form.check_password(class="form-control") }}
 			<span class="error-message">{{ form.check_password.errors[0] }}</span>
 			{{ form.phone_number.label(class='control-label')
+
+
 			}}{{ form.phone_number(class='form-control') }}
 			<span class="error-message">{{ form.phone_number.errors[0] }}</span>
-			{{ form.nickname.label(class='control-label')}}{{ form.nickname(class='form-control') }}
+			{{ form.nickname.label(class='control-label')
+
+			}}{{ form.nickname(class='form-control') }}
 			<span class="error-message">{{ form.nickname.errors[0] }}</span>
 			{{ form.submit(class='btn btn-block btn-primary', id='submit') }}
 			{{ form.hidden_verification_code_hash(style="display: none;") }}

@@ -68,3 +68,27 @@ class Res():
         count = self.cursor.execute(sql)
         self.__set_attr(count)
         return count
+
+class City_code():
+    def __init__(self):
+        db.ping(reconnect=True)
+        self.cursor = db.cursor()
+
+    def __del__(self):
+        self.cursor.close()
+
+    def get_code_with_city(self, city):
+        sql = "select code from city_code where city='%s'" % city
+        self.cursor.execute(sql)
+        return self.cursor.fetchone()[0]
+
+    def get_city_with_code(self, code):
+        sql = "select city from city_code where code='%s'" % code
+        self.cursor.execute(sql)
+        return self.cursor.fetchone()[0]
+
+    def get_all_city(self):
+        sql = "select city from city_code"
+        self.cursor.execute(sql)
+        cities = [array[0] for array in self.cursor.fetchall()]
+        return cities

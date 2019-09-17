@@ -1,9 +1,8 @@
 from flask import render_template, request, jsonify
 from flask_login import login_required
 from . import main
-from ..models import Res
+from ..models import Res, City_code
 import requests as req
-import json
 
 
 @main.route("/index")
@@ -27,14 +26,12 @@ def get_res_info():
 
 @main.route("/all_location")
 def get_all_location():
-    with open("app/static/data/location_code_mapping.json", 'r') as f:
-        mapping = json.loads(f.read())
-    return jsonify(list(mapping.keys()))
+    city_code = City_code()
+    return jsonify(city_code.get_all_city())
 
 @main.route("/flight_info_with_location", methods=["POST"])
 def get_flight_info_with_location():
-    with open("app/static/data/location_code_mapping.json", 'r') as f:
-        mapping = json.loads(f.read())
+    city_code = City_code()
 
     leave = request.json['leave']
     arrive = request.json['arrive']
@@ -42,8 +39,8 @@ def get_flight_info_with_location():
 
     headers = {"Authorization": "APPCODE 797a45df4c3e4876ad887686d674010f"}
     data = {
-        "arrive_code": mapping[arrive],
-        "leave_code": mapping[leave],
+        "arrive_code": city_code.get_code_with_city(arrive),
+        "leave_code": city_code.get_code_with_city(leave),
         "query_date": date
     }
 

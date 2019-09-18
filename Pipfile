@@ -15,6 +15,7 @@ flask-bootstrap = "*"
 flask-login = "*"
 flask-mail = "*"
 requests = "*"
+lxml = "*"
 
 [requires]
 python_version = "3.7"

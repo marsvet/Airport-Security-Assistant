@@ -35,7 +35,7 @@ CREATE TABLE `具体物品` (
   KEY `FK_classify_idx` (`所属分类_id`),
   KEY `FK_统称_idx` (`统称_id`),
   CONSTRAINT `FK_carry` FOREIGN KEY (`携带方式_id`) REFERENCES `携带方式` (`方式_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK_分类1` FOREIGN KEY (`所属分类_id`) REFERENCES `随身携带和托运物品` (`分类_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `FK_分类1` FOREIGN KEY (`所属分类_id`) REFERENCES `物品分类` (`分类_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=196 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -90,6 +90,35 @@ SET character_set_client = utf8;
 SET character_set_client = @saved_cs_client;
 
 --
+-- Table structure for table `物品分类`
+--
+
+DROP TABLE IF EXISTS `物品分类`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `物品分类` (
+  `分类_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `分类_name` varchar(40) CHARACTER SET utf8 NOT NULL,
+  `分类_introduce` text CHARACTER SET utf8 NOT NULL,
+  `所属大类_id` int(10) unsigned DEFAULT NULL,
+  PRIMARY KEY (`分类_id`),
+  KEY `大类id` (`所属大类_id`),
+  CONSTRAINT `大类id` FOREIGN KEY (`所属大类_id`) REFERENCES `物品大类` (`大类_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `物品分类_ibfk_1` FOREIGN KEY (`所属大类_id`) REFERENCES `物品大类` (`大类_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `物品分类`
+--
+
+LOCK TABLES `物品分类` WRITE;
+/*!40000 ALTER TABLE `物品分类` DISABLE KEYS */;
+INSERT INTO `物品分类` VALUES (1,'枪支等武器（包括主要零部件）','能够发射弹药（包括弹丸及其他物品）并造成人身严重伤害的装置或者可能被误认为是此类装置的物品',1),(2,'爆炸或者燃烧物质和装置','能够造成人身严重伤害或者危及航空器安全的爆炸或燃烧装置（物质）或者可能被误认为是此类装置（物质）的物品',1),(3,'管制器具','能够造成人身伤害或者对航空安全和运输秩序构成较大危害的管制器具',1),(4,'危险物品','能够造成人身伤害或者对航空安全和运输秩序造成较大威海的危险物品',1),(5,'其他物品','其他能够造成人身伤害或者对航空安全和运输秩序造成较大威海的危险物品',1),(6,'国家法律、行政法规、规章规定的其他禁止运输的物品','/',1),(7,'锐器','该类物品带有锋利边缘或者锐利尖端，由金属或其他材料制成的、强度足以造成人身严重伤害的器械',2),(8,'钝器','该类物品不带有锋利边缘或者锐利尖端，由金属或其他材料制成的、强度足以造成人身严重伤害的器械',2),(9,'工具等其他器械','该类物品也属于能够造成人身伤害或者对航空安全和运输秩序构成较大危害的物品',2),(10,'液态物品','液体的易燃品危险性比固体大，燃烧起来漫延速度很快，几乎无法及时扑救，飞机在起落期间的压力变化很大，会导致可燃性气体的密度发生变化从而产生泄漏而发生安全事故。另外，很多恐怖袭击也都是借助液态物品展开。',2),(11,'电池等储电物品','货仓内环境不稳定，温度和气压的变化剧烈，同时行李放在货仓随着机身颠簸互相挤压，因为金属锂的不稳定性，锂电池都是脆性封装，在内部压力高时自动破裂。',2);
+/*!40000 ALTER TABLE `物品分类` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `物品大类`
 --
 
@@ -135,35 +164,6 @@ LOCK TABLES `统称` WRITE;
 /*!40000 ALTER TABLE `统称` DISABLE KEYS */;
 INSERT INTO `统称` VALUES (1,'军用枪、公务用枪'),(2,'民用枪'),(3,'其他枪支'),(4,'上述物品的仿真品'),(5,'弹药'),(6,'爆破器材'),(7,'烟火制品'),(8,'上述物品的仿真品'),(9,'管制刀具'),(10,'军警械具'),(11,'其他属于国家规定的管制器具'),(12,'压缩气体和液化气体'),(13,'自燃物品'),(14,'遇湿易燃物品'),(15,'易燃固体'),(16,'易燃液体'),(17,'氧化剂和有机过氧化物'),(18,'毒害品'),(19,'传染病病原体'),(20,'火种（包括各类点火装置）'),(23,'强磁化物、有强烈刺激性气味或者容易引起旅客恐慌情绪的物品以及不能判明性质可能具有危险性的物品'),(24,'/'),(25,'/'),(26,'/'),(27,'日用刀具（刀刃长度大于6厘米）'),(28,'专业刀具（刀刃长度不限）'),(29,'用作武术文艺表演的刀、矛、剑、戴等'),(30,'钝器'),(31,'工具'),(32,'其他物品'),(33,'酒精'),(34,'特殊人群所需的液体物品'),(35,'乘坐国际、地区航班的旅客携带的液态物品'),(36,'乘坐国内航班的旅客携带的液态物品'),(37,'在同一机场控制区内由国际、地区航班转乘国内航班的旅客携带的液态物品'),(38,'电池等储电物品'),(39,'无');
 /*!40000 ALTER TABLE `统称` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `随身携带和托运物品`
---
-
-DROP TABLE IF EXISTS `随身携带和托运物品`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `随身携带和托运物品` (
-  `分类_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `分类_name` varchar(40) CHARACTER SET utf8 NOT NULL,
-  `分类_introduce` text CHARACTER SET utf8 NOT NULL,
-  `所属大类_id` int(10) unsigned DEFAULT NULL,
-  PRIMARY KEY (`分类_id`),
-  KEY `大类id` (`所属大类_id`),
-  CONSTRAINT `大类id` FOREIGN KEY (`所属大类_id`) REFERENCES `物品大类` (`大类_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `随身携带和托运物品_ibfk_1` FOREIGN KEY (`所属大类_id`) REFERENCES `物品大类` (`大类_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `随身携带和托运物品`
---
-
-LOCK TABLES `随身携带和托运物品` WRITE;
-/*!40000 ALTER TABLE `随身携带和托运物品` DISABLE KEYS */;
-INSERT INTO `随身携带和托运物品` VALUES (1,'枪支等武器（包括主要零部件）','能够发射弹药（包括弹丸及其他物品）并造成人身严重伤害的装置或者可能被误认为是此类装置的物品',1),(2,'爆炸或者燃烧物质和装置','能够造成人身严重伤害或者危及航空器安全的爆炸或燃烧装置（物质）或者可能被误认为是此类装置（物质）的物品',1),(3,'管制器具','能够造成人身伤害或者对航空安全和运输秩序构成较大危害的管制器具',1),(4,'危险物品','能够造成人身伤害或者对航空安全和运输秩序造成较大威海的危险物品',1),(5,'其他物品','其他能够造成人身伤害或者对航空安全和运输秩序造成较大威海的危险物品',1),(6,'国家法律、行政法规、规章规定的其他禁止运输的物品','/',1),(7,'锐器','该类物品带有锋利边缘或者锐利尖端，由金属或其他材料制成的、强度足以造成人身严重伤害的器械',2),(8,'钝器','该类物品不带有锋利边缘或者锐利尖端，由金属或其他材料制成的、强度足以造成人身严重伤害的器械',2),(9,'工具等其他器械','该类物品也属于能够造成人身伤害或者对航空安全和运输秩序构成较大危害的物品',2),(10,'液态物品','液体的易燃品危险性比固体大，燃烧起来漫延速度很快，几乎无法及时扑救，飞机在起落期间的压力变化很大，会导致可燃性气体的密度发生变化从而产生泄漏而发生安全事故。另外，很多恐怖袭击也都是借助液态物品展开。',2),(11,'电池等储电物品','货仓内环境不稳定，温度和气压的变化剧烈，同时行李放在货仓随着机身颠簸互相挤压，因为金属锂的不稳定性，锂电池都是脆性封装，在内部压力高时自动破裂。',2);
-/*!40000 ALTER TABLE `随身携带和托运物品` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -300,4 +300,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-09-17 23:51:29
+-- Dump completed on 2019-09-19 15:09:52

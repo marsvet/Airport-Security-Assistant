@@ -31,10 +31,30 @@ class User(UserMixin):
     def add_user(self, email, password, phone_number="null", username="无昵称", signature="null", user_from="null"):
         password_hash = generate_password_hash(password)
         sql = "insert into users values(null, '%s', '%s', %s, '%s', '%s', '%s')" % (username,
-                                                                        password_hash, phone_number, email, signature, user_from)
+                                                                                    password_hash, phone_number, email, signature, user_from)
         count = self.cursor.execute(sql)
         self.__set_attr(0)
         db.commit()
+        return count
+
+    def modify_user(self, password=None, phone_number=None, username=None, signature=None, user_from=None):
+        sql = "update users set user_id = %s" % self.id
+        if password is not None:
+            password_hash = generate_password_hash(password)
+            sql += ", passwd = '%s'" % password_hash
+        if phone_number is not None:
+            sql += ", phone_number = %s" % phone_number
+        if username is not None:
+            sql += ", user_name = '%s'" % username
+        if signature is not None:
+            sql += ", signature = '%s'" % signature
+        if user_from is not None:
+            sql += ", user_from = '%s'" % user_from
+        sql += " where user_id = %s" % self.id
+
+        count = self.cursor.execute(sql)
+        db.commit()
+
         return count
 
     def verify_password(self, password):
@@ -68,6 +88,7 @@ class Res():
         count = self.cursor.execute(sql)
         self.__set_attr(count)
         return count
+
 
 class City_code():
     def __init__(self):

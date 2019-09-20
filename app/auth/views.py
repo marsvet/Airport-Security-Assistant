@@ -27,7 +27,7 @@ def verify_email():
 @auth.route('/login', methods=['POST'])  # 用电话号码或邮箱登录，不能用用户名登录，因为用户名不唯一
 def login():
     data = request.get_json()
-    email_or_phone = data['user']    # 获取电话号码或邮箱
+    email_or_phone = str(data['user'])    # 获取电话号码或邮箱
     password = data['password']
     if re.match(r'^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$', email_or_phone):   # 判断是否为邮箱
         key = 'email'
@@ -45,7 +45,7 @@ def login():
     if not user.verify_password(password):
         return jsonify({'isSuccess': False, 'msg': '密码错误'})
     else:
-        return jsonify({'isSuccess': True})
+        return jsonify({"isSuccess": True})
 
 
 @auth.route('/register', methods=['POST'])   # 用邮箱注册
@@ -66,8 +66,63 @@ def register():
         return jsonify({'isSuccess': False, 'msg': '密码必须由字母、数字、下划线组成'})
     if user.add_user(email, password) != 1:
         return jsonify({'isSuccess': False, 'msg': '系统内部错误'})
-    return jsonify({'isSuccess': True})
+    return jsonify({"isSuccess": True})
 
+
+@auth.route('/user_info')
+def get_user_info():
+    email = request.json['email']
+    user = User()
+    if user.get_user("email", email) == 0:
+        return jsonify({"isSuccess": False, "msg": "该邮箱不存在"})
+    user_info = {
+        "username": user.username,
+        "email": user.email,
+        "signature": user.signature,
+        "user_from": user.user_from
+    }
+    if user.phone_number is not None:
+        user_info["phone_number"] = str(user.phone_number)
+    else:
+        user_info["phone_number"] = user.phone_number
+
+    return jsonify(user_info)
+
+
+@auth.route("/verify_password", methods=['POST'])
+def verify_password():
+    email = request.json["email"]
+    password = request.json["password"]
+    user = User()
+    if user.get_user("email", email) == 0:
+        return jsonify({"isSuccess": False, "msg": "该邮箱不存在"})
+    if user.verify_password(password):
+        return jsonify({"isSuccess": True})
+    else:
+        return jsonify({"isSuccess": False})
+
+
+@auth.route("/modify_user_info", methods=['POST'])
+def modify_user_info():
+    email = request.json["email"]
+    new_info = {
+        "new_username": None,
+        "new_password": None,
+        "new_phone_number": None,
+        "new_signature": None,
+        "new_user_from": None
+    }
+    for key in new_info.keys():
+        if key in request.json.keys():
+            new_info[key] = request.json[key]
+
+    user = User()
+    if user.get_user("email", email) == 0:
+        return jsonify({"isSuccess": False, "msg": "该邮箱不存在"})
+    user.modify_user(password=new_info["new_password"], phone_number=new_info["new_phone_number"],
+                     username=new_info["new_username"], signature=new_info["new_signature"], user_from=new_info["new_user_from"])
+
+    return jsonify({"isSuccess": True})
 ######## prepare for Andriod APP ########
 
 

@@ -46,12 +46,14 @@ def get_res_info_by_image():
     rsp = req.post(URL + '?access_token=' + config.BAIDU_AI_ACCESS_TOKEN, data={
         "image": b64encode(image.read())
     })
-    result_json = json.loads(rsp.content)
+    try:
+        result = json.loads(rsp.content)["result"]
+    except:
+        return jsonify({"isSuccess": False, "msg": "找不到图片，请检查图片地址"})
+    result.sort(key=lambda item: item["score"], reverse=True)
 
     res = Res()
-    for item in result_json["result"]:
-        if item["score"] < 0.5:
-            return jsonify({"isSuccess": False, "msg": "找不到此物品"})
+    for item in result:
         if res.get_res_info_by_resname(item["keyword"]):
             to_return = {
                 'isSuccess': True,

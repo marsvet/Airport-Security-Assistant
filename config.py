@@ -22,6 +22,12 @@ class Config:
     MAIL_SUBJECT_PREFIX = '[CAI Service]'
     MAIL_SENDER = 'CAI_Service Admin <marsvet@163.com>'
 
+    ALIYUN_APPCODE = "797a45df4c3e4876ad887686d674010f"
+
+    BAIDU_AI_API_KEY = "oIuFMt088FYXXGwg0iG5SPQ5"
+    BAIDU_AI_SECRET_KEY = "8LrWnedKmqySAUpqkpifmglhsOBMX5rj"
+    BAIDU_AI_ACCESS_TOKEN = "24.ea1a3662676185e39eff6c3474ccd960.2592000.1571635827.282335-17300827"    # token 需要每 30 天重新生成一次
+
     @staticmethod
     def init_app(app):
         pass

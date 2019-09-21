@@ -2,8 +2,11 @@ from flask import render_template, request, jsonify
 from flask_login import login_required
 from lxml import etree
 from . import main
+from .. import config
 from ..models import Res, City_code
 import requests as req
+from base64 import b64encode
+import json
 
 
 @main.route("/index")
@@ -18,11 +21,48 @@ def get_res_info():
     res_name = request.json['res_name']
     res = Res()
     if res.get_res_info_by_resname(res_name):
-        to_return = {'isSuccess': True, '物品名称': res.res_name, '附加说明': res.description,
-                     '限定规格': res.limit, '携带方式': res.carry_method, '物品所属分类': res.res_class}
+        to_return = {
+            'isSuccess': True,
+            '物品名称': res.res_name,
+            '附加说明': res.description,
+            '限定规格': res.limit,
+            '携带方式': res.carry_method,
+            '物品所属分类': res.res_class
+        }
         return jsonify(to_return)
     else:
         return jsonify({'isSuccess': True, '携带方式': '可以随身携带'})
+
+
+@main.route("/res_info_by_image", methods=["POST"])
+def get_res_info_by_image():
+    ALLOWED_EXTENSIONS = ["jpg", "jpeg", "png", "gif", "bmp"]
+    URL = "https://aip.baidubce.com/rest/2.0/image-classify/v2/advanced_general"
+
+    image = request.files["image"]
+    if image.filename.split('.')[-1].lower() not in ALLOWED_EXTENSIONS:
+        return jsonify({"isSuccess": False, "msg": "文件格式不支持"})
+
+    rsp = req.post(URL + '?access_token=' + config.BAIDU_AI_ACCESS_TOKEN, data={
+        "image": b64encode(image.read())
+    })
+    result_json = json.loads(rsp.content)
+
+    res = Res()
+    for item in result_json["result"]:
+        if item["score"] < 0.5:
+            return jsonify({"isSuccess": False, "msg": "找不到此物品"})
+        if res.get_res_info_by_resname(item["keyword"]):
+            to_return = {
+                'isSuccess': True,
+                '物品名称': res.res_name,
+                '附加说明': res.description,
+                '限定规格': res.limit,
+                '携带方式': res.carry_method,
+                '物品所属分类': res.res_class
+            }
+            return jsonify(to_return)
+    return jsonify({"isSuccess": False, "msg": "找不到此物品"})
 
 
 @main.route("/all_location")
@@ -39,7 +79,7 @@ def get_flight_info_with_location():
     arrive = request.json['arrive']
     date = request.json['date']
 
-    headers = {"Authorization": "APPCODE 797a45df4c3e4876ad887686d674010f"}
+    headers = {"Authorization": "APPCODE %s" % config.ALIYUN_APPCODE}
     data = {
         "arrive_code": city_code.get_code_with_city(arrive),
         "leave_code": city_code.get_code_with_city(leave),
@@ -75,7 +115,7 @@ def get_flight_info_by_no():
         arrive_location = row.xpath('span[7]/text()')[0]
         flight_info = {
             'isSuccess': True,
-            'flightNo' : row.xpath('span[1]/b/a[2]/text()')[0],
+            'flightNo': row.xpath('span[1]/b/a[2]/text()')[0],
             'airlineCompany': row.xpath('span[1]/b/a[1]/text()')[0],
             'tkTime': row.xpath('span[2]/text()')[0].strip(),
             'leavePort': leave_location[:-2] + "机场",

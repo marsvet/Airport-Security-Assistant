@@ -90,8 +90,7 @@ def get_flight_info_with_location():
 
     rsp = req.post("http://airinfo.market.alicloudapi.com/airInfos",
                    data=data, headers=headers)
-    rsp.encoding = rsp.apparent_encoding
-    flightInfos = rsp.text
+    flightInfos = json.loads(rsp.content)
 
     return jsonify(flightInfos)
 

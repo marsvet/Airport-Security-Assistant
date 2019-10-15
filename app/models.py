@@ -89,6 +89,12 @@ class Res():
         self.__set_attr(count)
         return count
 
+    def get_all_res_name(self):
+        sql = "select 物品_name from 具体物品"
+        self.cursor.execute(sql)
+        res_names = [array[0] for array in self.cursor.fetchall()]
+        return res_names
+
 
 class City_code():
     def __init__(self):

@@ -7,6 +7,7 @@ from ..models import Res, City_code
 import requests as req
 from base64 import b64encode
 import json
+import re
 
 
 @main.route("/index")
@@ -54,16 +55,18 @@ def get_res_info_by_image():
 
     res = Res()
     for item in result:
-        if res.get_res_info_by_resname(item["keyword"]):
-            to_return = {
-                'isSuccess': True,
-                '物品名称': res.res_name,
-                '附加说明': res.description,
-                '限定规格': res.limit,
-                '携带方式': res.carry_method,
-                '物品所属分类': res.res_class
-            }
-            return jsonify(to_return)
+        obs = re.split(r"[/-]", item["keyword"])
+        for ob in obs:
+            if res.get_res_info_by_resname(ob):
+                to_return = {
+                    'isSuccess': True,
+                    '物品名称': res.res_name,
+                    '附加说明': res.description,
+                    '限定规格': res.limit,
+                    '携带方式': res.carry_method,
+                    '物品所属分类': res.res_class
+                }
+                return jsonify(to_return)
     return jsonify({"isSuccess": False, "msg": "找不到此物品"})
 
 

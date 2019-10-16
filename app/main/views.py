@@ -24,7 +24,7 @@ def get_all_res_name():
     return jsonify(res.get_all_res_name())
 
 
-@main.route("/res_info")
+@main.route("/res_info", methods=["POST"])
 def get_res_info():
     res_name = request.json['res_name']
     res = Res()

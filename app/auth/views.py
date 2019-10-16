@@ -69,7 +69,7 @@ def register():
     return jsonify({"isSuccess": True})
 
 
-@auth.route('/user_info')
+@auth.route('/user_info', methods=["POST"])
 def get_user_info():
     email = request.json['email']
     user = User()

@@ -26,7 +26,7 @@ class Config:
 
     BAIDU_AI_API_KEY = "oIuFMt088FYXXGwg0iG5SPQ5"
     BAIDU_AI_SECRET_KEY = "8LrWnedKmqySAUpqkpifmglhsOBMX5rj"
-    BAIDU_AI_ACCESS_TOKEN = "24.ea1a3662676185e39eff6c3474ccd960.2592000.1571635827.282335-17300827"    # token 需要每 30 天重新生成一次
+    BAIDU_AI_ACCESS_TOKEN = "24.bdb6d02cd87cba25763ad5a55bff82b5.2592000.1574330191.282335-17300827"    # token 需要每 30 天重新生成一次
 
     @staticmethod
     def init_app(app):

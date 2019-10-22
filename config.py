@@ -12,7 +12,7 @@ class Config:
         'port': 3306,
         'user': 'root',
         'password': os.environ.get('MYSQL_PASSWORD'),
-        'db': 'aviation'
+        'db': 'aviation_new'
     }
     MAIL_SERVER = 'smtp.163.com'
     MAIL_PORT = 465

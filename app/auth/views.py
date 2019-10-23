@@ -76,6 +76,7 @@ def get_user_info():
     if user.get_user("email", email) == 0:
         return jsonify({"isSuccess": False, "msg": "该邮箱不存在"})
     user_info = {
+        "isSuccess": True,
         "username": user.username,
         "email": user.email,
         "signature": user.signature,

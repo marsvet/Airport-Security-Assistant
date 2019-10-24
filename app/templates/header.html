@@ -1,101 +1,23 @@
-<!-- header -->
-<header style="margin-bottom: 74px;">
-	<!-- navbar -->
-	<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
-		<h2>
-			<a
-				id="logo"
-				class="navbar-brand"
-				href="/"
-				style="vertical-align: middle; font-style: normal; font-weight: bold;"
-			>
-				<img
-					src="{{ url_for('static', filename='images/logo.svg') }}"
-					alt="logo-img"
-					style="height: 60px; margin: 0 10px 5px 25px;"
-				/>
-				CAI Service
-			</a>
-		</h2>
-
-		<button
-			class="navbar-toggler"
-			type="button"
-			data-toggle="collapse"
-			data-target="#navbarSupportedContent"
-			aria-controls="navbarSupportedContent"
-			aria-expanded="false"
-			aria-label="Toggle navigation"
-		>
-			<i class="fa fa-bars"></i>
-		</button>
-
-		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<ul class="navbar-nav ml-auto text-center mr-xl-5 mt-lg-0 mt-3">
-				{% if request.endpoint == 'auth._login' %}
-				<li class="nav-item">
-					<a
-						class="nav-link"
-						href="/_register"
-						style="color: black; background-color: rgb(0, 238, 255);"
-						>注册</a
-					>
-				</li>
-				{% elif request.endpoint == 'auth._register'%}
-				<li class="nav-item">
-					<a
-						class="nav-link"
-						href="/_login"
-						style="color: black; background-color: rgb(0, 238, 255);"
-						>登录</a
-					>
-				</li>
-				{% else %}
-				<li class="nav-item active">
-					<a class="nav-link" href="/">首页 </a>
-				</li>
-
-				<li class="nav-item">
-					<a class="nav-link" href="/regulations">民航法规</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="/inquiry">危险物品</a>
-				</li>
-
-				<li class="nav-item">
-					<a class="nav-link" href="#">行李状态</a>
-				</li>
-
-				<li class="nav-item">
-					<a class="nav-link" href="/airport_info">机场信息</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="/survey">满意度调查</a>
-				</li>
-				<li class="nav-item" id="user_info">
-					<a
-						class="nav-link dropdown-toggle"
-						href="#"
-						id="navbarDropdown"
-						role="button"
-						data-toggle="dropdown"
-						aria-haspopup="true"
-						aria-expanded="false"
-						style="color: white; background-color: #6c5ce7;"
-					>
-						{{ current_user.username }}
-					</a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" href="/_user_info">个人信息</a>
-						<a class="dropdown-item" href="/_new_password">修改密码</a>
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="/_logout">退出账号</a>
-					</div>
-				</li>
-				{% endif %}
+<header id="header">
+	<div class="wrapper">
+		<div class="brand">
+			CAI Service
+		</div>
+		<div class="nav-list">
+			<ul>
+				<li>首页</li>
+				<li>民航法规</li>
+				<li>危险物品</li>
+				<li>行李状态</li>
+				<li>机场信息</li>
+				<li>满意度调查</li>
 			</ul>
 		</div>
-	</nav>
-	<!-- //navbar ends here -->
+		<!-- <div class="user">
+		<img src="{{ user_avatar }}" alt="user-avatar" class="user-avatar">
+		<button type="button" class="user-name">
+			{{ user_name }}
+		</button>
+	</div> -->
+	</div>
 </header>
-<!-- //header -->

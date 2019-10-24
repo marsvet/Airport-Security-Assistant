@@ -1,0 +1,44 @@
+@import "variables";
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	width: 100%;
+	padding: 46px 0 46px 0;
+	border-bottom: 1px solid black;
+	float: left;
+
+	.wrapper {
+		width: 100%;
+		float: left;
+
+		.brand {
+			float:left;
+			margin-left: 100px;
+			font-size: 26px;
+		}
+
+		.nav-list {
+			float: right;
+			margin-right: 100px;
+
+			ul {
+				float: right;
+				list-style: none;
+
+				li {
+					margin-left: 10px;
+					display: inline-block;
+					padding: 5px 10px 5px 10px;
+				}
+			}
+		}
+	}
+}
+
+#footer {
+
+}

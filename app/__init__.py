@@ -4,6 +4,7 @@ from pymysql import connect
 from flask_login import LoginManager
 from flask_mail import Mail
 from flask_bootstrap import Bootstrap
+from flask_scss import Scss
 
 config = Config()
 db = connect(**config.pymysql_config)
@@ -20,6 +21,7 @@ def create_app():
 	login_manager.init_app(app)
 	mail.init_app(app)
 	bootstrap.init_app(app)
+	Scss(app, static_dir='app/static/css', asset_dir='app/static/scss')
 
 	from .main import main as main_blueprint
 	app.register_blueprint(main_blueprint)

@@ -16,6 +16,7 @@ flask-login = "*"
 flask-mail = "*"
 requests = "*"
 lxml = "*"
+flask-scss = "*"
 
 [requires]
 python_version = "3.7"

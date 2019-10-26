@@ -5,7 +5,6 @@
   #header {
     width: 100%;
     padding: 46px 0 46px 0;
-    border-bottom: 1px solid black;
     float: left; }
     #header .wrapper {
       width: 100%;
@@ -19,8 +18,57 @@
           margin-right: 100px; }
           #header .wrapper .nav-list ul {
             float: right;
-            list-style: none; }
+            list-style: none;
+            margin-bottom: 0; }
             #header .wrapper .nav-list ul li {
               margin-left: 10px;
               display: inline-block;
-              padding: 5px 10px 5px 10px; }
+              padding: 7px 10px 7px 10px; }
+
+#carousel-map {
+  float: left; }
+
+  .function {
+    width: 100%;
+    float: left;
+    padding: 0 15%; }
+    .function .onerow {
+      margin: 70px;
+      text-align: center; }
+      .function .onerow > div {
+        width: 200px;
+        padding: 20px 15px;
+        margin-right: 120px;
+        display: inline-block; }
+        .function .onerow > div:last-child {
+          margin-right: 0; }
+          .function .onerow > div .icon {
+            border: 1px solid #bebebe;
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            margin: auto;
+            transition: all 0.5s; }
+            .function .onerow > div .icon i {
+              color: #bebebe;
+              font-size: 30px;
+              line-height: 100px; }
+        .function .onerow > div h4 {
+          font-size: 1.2em;
+          margin-top: 20px; }
+          .function .onerow > div:hover .icon {
+            border-color: #237BBA;
+            background-color: #237BBA; }
+            .function .onerow > div:hover .icon i {
+              color: white; }
+
+#footer {
+  width: 100%;
+  background-color: #237bba;
+  height: 100px;
+  text-align: center;
+  float: left; }
+  #footer p {
+    display: inline-block;
+    line-height: 100px;
+    color: white; }

@@ -2,9 +2,18 @@
   margin: 0;
   padding: 0; }
 
+  a {
+    text-decoration: none;
+    color: black; }
+    a:hover {
+      text-decoration: none; }
+
+button {
+  cursor: pointer; }
+
   #header {
     width: 100%;
-    padding: 46px 0 46px 0;
+    padding: 35px 0 35px 0;
     float: left; }
     #header .wrapper {
       width: 100%;
@@ -12,7 +21,8 @@
       #header .wrapper .brand {
         float: left;
         margin-left: 100px;
-        font-size: 26px; }
+        font-size: 29px;
+        font-weight: bold; }
         #header .wrapper .nav-list {
           float: right;
           margin-right: 100px; }
@@ -21,9 +31,15 @@
             list-style: none;
             margin-bottom: 0; }
             #header .wrapper .nav-list ul li {
-              margin-left: 10px;
               display: inline-block;
-              padding: 7px 10px 7px 10px; }
+              transition: all 0.7s; }
+              #header .wrapper .nav-list ul li a {
+                display: inline-block;
+                padding: 10px 23px 10px 23px; }
+                #header .wrapper .nav-list ul li:hover {
+                  background-color: #187CC2; }
+                  #header .wrapper .nav-list ul li:hover a {
+                    color: white; }
 
 #carousel-map {
   float: left; }
@@ -31,14 +47,16 @@
   .function {
     width: 100%;
     float: left;
-    padding: 0 15%; }
+    padding: 70px 0; }
     .function .onerow {
-      margin: 70px;
-      text-align: center; }
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+      min-width: 800; }
       .function .onerow > div {
         width: 200px;
         padding: 20px 15px;
-        margin-right: 120px;
+        margin-right: 100px;
         display: inline-block; }
         .function .onerow > div:last-child {
           margin-right: 0; }
@@ -61,6 +79,8 @@
             background-color: #237BBA; }
             .function .onerow > div:hover .icon i {
               color: white; }
+          .function .onerow > div:hover h4 {
+            color: #237BBA; }
 
 #footer {
   width: 100%;

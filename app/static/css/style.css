@@ -6,15 +6,17 @@
     text-decoration: none;
     color: black; }
     a:hover {
-      text-decoration: none; }
+      text-decoration: none;
+      color: black; }
 
 button {
   cursor: pointer; }
 
   #header {
     width: 100%;
-    padding: 35px 0 35px 0;
-    float: left; }
+    padding: 15px 0 15px 0;
+    float: left;
+    border-top: 4px solid #237bba; }
     #header .wrapper {
       width: 100%;
       float: left; }
@@ -25,21 +27,54 @@ button {
         font-weight: bold; }
         #header .wrapper .nav-list {
           float: right;
-          margin-right: 100px; }
-          #header .wrapper .nav-list ul {
-            float: right;
-            list-style: none;
-            margin-bottom: 0; }
-            #header .wrapper .nav-list ul li {
-              display: inline-block;
-              transition: all 0.7s; }
-              #header .wrapper .nav-list ul li a {
-                display: inline-block;
-                padding: 10px 23px 10px 23px; }
-                #header .wrapper .nav-list ul li:hover {
-                  background-color: #187CC2; }
-                  #header .wrapper .nav-list ul li:hover a {
-                    color: white; }
+          margin-right: 30px; }
+          #header .wrapper .nav-list a {
+            display: inline-block;
+            padding: 10px 23px 10px 23px;
+            transition: all 0.7s;
+            float: left; }
+            #header .wrapper .nav-list a:hover {
+              background-color: #187cc2;
+              color: white; }
+      #header .wrapper .user {
+        float: right;
+        margin-right: 30px;
+        cursor: pointer; }
+        #header .wrapper .user .login-or-register {
+          padding: 10px 23px 10px 23px;
+          display: inline-block;
+          transition: all 0.7s;
+          background-color: #187cc2;
+          color: white; }
+          #header .wrapper .user .login-or-register:hover {
+            background-color: black; }
+        #header .wrapper .user .user-avatar {
+          height: 40px;
+          width: 40px;
+          border-radius: 50%;
+          display: inline-block; }
+          #header .wrapper .user .user-name {
+            padding: 10px 3px;
+            display: inline-block; }
+            #header .wrapper .user .user-dashboard {
+              position: absolute;
+              top: 50px;
+              right: 0;
+              background: white;
+              width: 200px;
+              z-index: 10;
+              border-bottom-left-radius: 4px;
+              border-bottom-right-radius: 4px;
+              box-shadow: 0 0 0 white;
+              opacity: 0;
+              transition: top 0.5s, opacity 0.2s, box-shadow 0.5s; }
+              #header .wrapper .user .user-dashboard a {
+                display: block;
+                padding: 10px 15px; }
+        #header .wrapper .user .show-user-dashboard {
+          top: 75px;
+          opacity: 1;
+          box-shadow: -1px 3px 3px rgba(128, 128, 128, 0.5); }
 
 #carousel-map {
   float: left; }
@@ -47,40 +82,49 @@ button {
   .function {
     width: 100%;
     float: left;
-    padding: 70px 0; }
-    .function .onerow {
-      text-align: center;
-      margin-left: auto;
-      margin-right: auto;
-      min-width: 800; }
-      .function .onerow > div {
-        width: 200px;
-        padding: 20px 15px;
-        margin-right: 100px;
-        display: inline-block; }
-        .function .onerow > div:last-child {
-          margin-right: 0; }
-          .function .onerow > div .icon {
-            border: 1px solid #bebebe;
-            border-radius: 50%;
-            width: 100px;
-            height: 100px;
-            margin: auto;
-            transition: all 0.5s; }
-            .function .onerow > div .icon i {
-              color: #bebebe;
-              font-size: 30px;
-              line-height: 100px; }
-        .function .onerow > div h4 {
-          font-size: 1.2em;
-          margin-top: 20px; }
-          .function .onerow > div:hover .icon {
-            border-color: #237BBA;
-            background-color: #237BBA; }
-            .function .onerow > div:hover .icon i {
-              color: white; }
-          .function .onerow > div:hover h4 {
-            color: #237BBA; }
+    padding: 50px 0 70px 0;
+    text-align: center; }
+    .function h2 {
+      margin: 0 auto 30px auto; }
+      .function hr {
+        margin: 0 auto 40px auto;
+        border: 0;
+        color: #237bba;
+        background-color: #237bba;
+        height: 4px;
+        width: 60px; }
+        .function .onerow {
+          margin-left: auto;
+          margin-right: auto;
+          min-width: 800; }
+          .function .onerow > div {
+            width: 200px;
+            padding: 20px 15px;
+            margin-right: 100px;
+            display: inline-block; }
+            .function .onerow > div:last-child {
+              margin-right: 0; }
+              .function .onerow > div .icon {
+                border: 1px solid #bebebe;
+                border-radius: 50%;
+                width: 100px;
+                height: 100px;
+                margin: auto;
+                transition: all 0.5s; }
+                .function .onerow > div .icon i {
+                  color: #bebebe;
+                  font-size: 30px;
+                  line-height: 100px; }
+            .function .onerow > div h4 {
+              font-size: 1.2em;
+              margin-top: 20px; }
+              .function .onerow > div:hover .icon {
+                border-color: #237bba;
+                background-color: #237bba; }
+                .function .onerow > div:hover .icon i {
+                  color: white; }
+              .function .onerow > div:hover h4 {
+                color: #237bba; }
 
 #footer {
   width: 100%;
@@ -92,3 +136,60 @@ button {
     display: inline-block;
     line-height: 100px;
     color: white; }
+
+#login, #register {
+  width: 35%;
+  margin: 0 auto;
+  padding-top: 130px; }
+  #login h2, #register h2 {
+    font-weight: bold;
+    padding-bottom: 18px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1); }
+    #login .flash-message, #register .flash-message {
+      position: relative;
+      bottom: -20px; }
+      #login .input-label, #register .input-label {
+        margin-top: 18px;
+        margin-bottom: 7px; }
+        #login .error-message, #register .error-message {
+          font-size: 0.8em;
+          color: red;
+          display: block;
+          margin-top: 7px; }
+          #login form p, #register form p {
+            margin-top: 50px; }
+            #login .submit-button, #register .submit-button {
+              background-color: #1892c2;
+              width: 140px;
+              border-radius: 50px;
+              border-color: #1892c2;
+              color: white; }
+              #login .submit-button:focus, #login .submit-button:hover,
+              #register .submit-button:focus, #register .submit-button:hover {
+                background-color: #21cbce;
+                outline: none;
+                box-shadow: none;
+                border-color: #21cbce; }
+
+#login-form a {
+  color: #1892c2; }
+  #login-form form a {
+    margin-left: 25px; }
+    #login-form > p {
+      font-size: 0.9em; }
+
+#register-form form p span {
+  font-size: 0.9em;
+  margin-left: 25px; }
+  #register-form form p a {
+    color: #1892c2; }
+
+#verify_email_button {
+  background-color: #1892c2;
+  border-color: #1892c2;
+  color: white; }
+  #verify_email_button:focus, #verify_email_button:hover {
+    background-color: #69B8D7;
+    outline: none;
+    box-shadow: none;
+    border-color: #69B8D7; }

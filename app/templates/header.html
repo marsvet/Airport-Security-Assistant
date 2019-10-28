@@ -3,21 +3,34 @@
 		<div class="brand">
 			<a href="/">CAI Service</a>
 		</div>
+			{% if current_user.is_authenticated %}
+				<div class="user" onclick="toggleUserDashboard()">
+					<img src="{{ url_for('static', filename='avatar/Avatar.jpg') }}" alt="user-avatar" class="user-avatar">
+					<span class="user-name">{{ current_user.username }}</span>
+					<div class="user-dashboard">
+						<a href="#">个人信息</a>
+						<a href="#">修改密码</a>
+						<a href="/_logout">退出账号</a>
+					</div>
+				</div>
+			{% else %}
+				<div class="user">
+					{% if request.endpoint == 'auth._login' %}
+						<a href="/_register" class="login-or-register">注册</a>
+					{% elif request.endpoint == 'auth._register' %}
+						<a href="/_login" class="login-or-register">登录</a>
+					{% else %}
+						<a href="/_login" class="login-or-register">登录/注册</a>
+					{% endif %}
+				</div>
+			{% endif %}
 		<div class="nav-list">
-			<ul>
-				<li><a href="/">首页</a></li>
-				<li><a href="#">民航法规</a></li>
-				<li><a href="#">危险物品</a></li>
-				<li><a href="#">行李状态</a></li>
-				<li><a href="#">机场信息</a></li>
-				<li><a href="#">满意度调查</a></li>
-			</ul>
+			<a href="/">首页</a>
+			<a href="#">民航法规</a>
+			<a href="#">危险物品</a>
+			<a href="#">行李状态</a>
+			<a href="#">机场信息</a>
+			<a href="#">满意度调查</a>
 		</div>
-		<!-- <div class="user">
-		<img src="{{ user_avatar }}" alt="user-avatar" class="user-avatar">
-		<button type="button" class="user-name">
-			{{ user_name }}
-		</button>
-	</div> -->
 	</div>
 </header>

@@ -178,14 +178,13 @@ def _register():
         user.add_user(form.email.data, form.password.data,
                       phone_number, nickname)
         flash('注册成功，请登录')
-        return redirect('/_login')
+        return redirect('/_register')
     return render_template('register.html', form=form, title="新用户注册")
 
 
 @auth.route('/_logout')
 def _logout():
     logout_user()
-    flash('账号已退出')
-    return redirect(url_for('auth._login'))
+    return redirect('/')
 
 ######## prepare for Web ########

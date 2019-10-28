@@ -21,8 +21,9 @@ button {
 
 #header {
 	width: 100%;
-	padding: 35px 0 35px 0;
+	padding: 15px 0 15px 0;
 	float: left;
+	border-top: 4px solid #237bba;
 
 	.wrapper {
 		width: 100%;
@@ -37,30 +38,73 @@ button {
 
 		.nav-list {
 			float: right;
-			margin-right: 100px;
+			margin-right: 30px;
 
-			ul {
-				float: right;
-				list-style: none;
-				margin-bottom: 0;
+			a {
+				display: inline-block;
+				padding: 10px 23px 10px 23px;
+				transition: all 0.7s;
+				float: left;
 
-				li {
-					display: inline-block;
-					transition: all 0.7s;
-
-					a {
-						display: inline-block;
-						padding: 10px 23px 10px 23px;
-					}
-
-					&:hover {
-						background-color: #187CC2;
-
-						a {
-							color: white;
-						}
-					}
+				&:hover {
+					background-color: #187cc2;
+					color: white;
 				}
+			}
+		}
+
+		.user {
+			float: right;
+			margin-right: 30px;
+			cursor: pointer;
+
+			.login-or-register {
+				padding: 10px 23px 10px 23px;
+				display: inline-block;
+				transition: all 0.7s;
+				background-color: #187cc2;
+				color: white;
+
+				&:hover {
+					background-color: black;
+				}
+			}
+
+			.user-avatar {
+				height: 40px;
+				width: 40px;
+				border-radius: 50%;
+				display: inline-block;
+			}
+
+			.user-name {
+				padding: 10px 3px;
+				display: inline-block;
+			}
+
+			.user-dashboard {
+				position: absolute;
+				top: 50px;
+				right: 0;
+				background: white;
+				width: 200px;
+				z-index: 10;
+				border-bottom-left-radius: 4px;
+				border-bottom-right-radius: 4px;
+				box-shadow: 0 0 0 white;
+				opacity: 0;
+				transition: top 0.5s, opacity 0.2s, box-shadow 0.5s;
+
+				a {
+					display: block;
+					padding: 10px 15px;
+				}
+			}
+
+			.show-user-dashboard {
+				top: 75px;
+				opacity: 1;
+				box-shadow: -1px 3px 3px rgba(128, 128, 128, 0.5);
 			}
 		}
 	}
@@ -73,10 +117,23 @@ button {
 .function {
 	width: 100%;
 	float: left;
-	padding: 70px 0;
+	padding: 50px 0 70px 0;
+	text-align: center;
+
+	h2 {
+		margin: 0 auto 30px auto;
+	}
+
+	hr {
+		margin: 0 auto 40px auto;
+		border: 0;
+		color: #237bba;
+		background-color: #237bba;
+		height: 4px;
+		width: 60px;
+	}
 
 	.onerow {
-		text-align: center;
 		margin-left: auto;
 		margin-right: auto;
 		min-width: 800;
@@ -113,8 +170,8 @@ button {
 
 			&:hover {
 				.icon {
-					border-color: #237BBA;
-					background-color: #237BBA;
+					border-color: #237bba;
+					background-color: #237bba;
 
 					i {
 						color: white;
@@ -122,7 +179,7 @@ button {
 				}
 
 				h4 {
-					color: #237BBA;
+					color: #237bba;
 				}
 			}
 		}
@@ -140,5 +197,94 @@ button {
 		display: inline-block;
 		line-height: 100px;
 		color: white;
+	}
+}
+
+#login,
+#register {
+	width: 35%;
+	margin: 0 auto;
+	padding-top: 130px;
+
+	h2 {
+		font-weight: bold;
+		padding-bottom: 18px;
+		border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+	}
+
+	.flash-message {
+		position: relative;
+		bottom: -20px;
+	}
+
+	.input-label {
+		margin-top: 18px;
+		margin-bottom: 7px;
+	}
+
+	.error-message {
+		font-size: 0.8em;
+		color: red;
+		display: block;
+		margin-top: 7px;
+	}
+
+	form p {
+		margin-top: 50px;
+	}
+
+	.submit-button {
+		background-color: #1892c2;
+		width: 140px;
+		border-radius: 50px;
+		border-color: #1892c2;
+		color: white;
+
+		&:focus, &:hover {
+			background-color: #21cbce;
+			outline: none;
+			box-shadow: none;
+			border-color: #21cbce;
+		}
+	}
+}
+
+#login-form {
+	a {
+		color: #1892c2;
+	}
+
+	form a {
+		margin-left: 25px;
+	}
+
+	> p {
+		font-size: 0.9em;
+	}
+}
+
+#register-form {
+	form p {
+		span {
+			font-size: 0.9em;
+			margin-left: 25px;
+		}
+
+		a {
+			color: #1892c2;
+		}
+	}
+}
+
+#verify_email_button {
+	background-color: #1892c2;
+	border-color: #1892c2;
+	color: white;
+
+	&:focus, &:hover {
+		background-color: #69B8D7;
+		outline: none;
+		box-shadow: none;
+		border-color: #69B8D7;
 	}
 }

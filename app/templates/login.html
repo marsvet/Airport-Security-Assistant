@@ -1,91 +1,45 @@
-{% extends "base.html" %} {% block title %}{{ title }}{% endblock %} {% block
-inner_css %}
+{% extends "base.html" %} {% block title %}{{ title }}{% endblock %}
 
+{% block inner_css %}
 <style>
-	#main {
-		padding-top: 30px;
-		margin: 30px 10%;
+	#footer {
+		background-color: white;
+		border-top: 1px solid rgba(0, 0, 0, 0.1);
+		margin-top: 30px;
 	}
 
-	#main > h1 {
-		margin-left: 30px;
-		padding-bottom: 30px;
-		border-bottom: 1px solid rgba(128, 128, 128, 0.281);
-	}
-
-	#login-form {
-		padding: 30px 50px;
-	}
-
-	#login-form .control-label {
-		font-weight: bold;
-	}
-
-	#login-form .form-control {
-		margin-bottom: 20px;
-	}
-
-	#remember_me_label {
-		font-size: 0.9em;
-	}
-
-	#submit {
-		margin: 5px auto 20px auto;
-	}
-
-	#login-form p {
-		font-size: 0.9em;
-		text-align: center;
-	}
-
-	.error-message {
-		font-size: 0.9em;
-		color: red;
-		display: block;
-		position: relative;
-		top: -12px;
-	}
-
-	@media (max-width: 600px) {
-		#main {
-			margin: 50px 20px;
-		}
-		#main > h1 {
-			margin: 0;
-		}
-
-		#login-form {
-			padding: 30px 20px;
-		}
+	#footer p {
+		color: #999999;
 	}
 </style>
+{% endblock %}
 
-{% endblock %} {% block main_content %} {% include "header.html" %}
+{% block main_content %} {% include "header.html" %}
 
-{% if get_flashed_messages()[0] %}
-	<div class="alert alert-warning" style="text-align: center;">
-		<button type="button" class="close" data-dismiss="alert">&times;</button>
-		{{ get_flashed_messages()[0] }}
-	</div>
-{% endif %}
-
-<div id="main">
-	<h1>登录</h1>
-	<div id="login-form" class="col-md-5">
+<div id="login">
+	<h2>登录</h2>
+	{% if get_flashed_messages()[0] %}
+		<div class="alert alert-primary flash-message">
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+			{{ get_flashed_messages()[0] }}
+		</div>
+	{% endif %}
+	<div id="login-form">
 		<form method="POST">
 			{{ form.hidden_tag() }}
-			{{ form.account.label(class='control-label')
+			{{ form.account.label(class='input-label')
 			}}{{ form.account(class='form-control') }}
 			<span class="error-message">{{ form.account.errors[0] }}</span>
-			{{ form.password.label(class='control-label')
+			{{ form.password.label(class='input-label')
 			}}{{ form.password(class="form-control") }}
 			<span class="error-message">{{ form.password.errors[0] }}</span>
-			{{ form.remember_me() }}
-			{{ form.remember_me.label(id="remember_me_label") }}
-			{{ form.submit(class='btn btn-block btn-primary', id='submit') }}
+			<p>{{ form.submit(class="btn btn-primary submit-button") }}
+			<a href="#">忘记密码？</a></p>
 		</form>
-		<p>忘记密码？<a href="#">点此找回密码</a></p>
-		<p>还未注册？<a href="_register">点此注册新账户</a></p>
+		<p>没有账号？<a href="_register">立即注册 →</a></p>
 	</div>
 </div>
+
+{% include "footer.html" %}
+
 {% endblock %}

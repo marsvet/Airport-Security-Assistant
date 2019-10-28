@@ -9,8 +9,8 @@ from flask_scss import Scss
 config = Config()
 db = connect(**config.pymysql_config)
 login_manager = LoginManager()
-login_manager.login_view = 'auth._login'
-login_manager.login_message = '请先登录！'
+# login_manager.login_view = 'auth._login'
+# login_manager.login_message = '请先登录！'
 mail = Mail()
 bootstrap = Bootstrap()
 

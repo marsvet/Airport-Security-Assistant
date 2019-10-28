@@ -200,6 +200,15 @@ button {
 	}
 }
 
+.background {
+	width: 100%;
+	float: left;
+	background-image: url("/static/images/background.svg");
+	background-size: cover;
+	background-position: 50%;
+	background-repeat: no-repeat;
+}
+
 #login,
 #register {
 	width: 35%;

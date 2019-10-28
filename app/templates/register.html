@@ -2,8 +2,7 @@
 inner_css %}
 <style>
 	#footer {
-		background-color: white;
-		border-top: 1px solid rgba(0, 0, 0, 0.1);
+		background-color: rgba(255, 255, 255, 0);
 		margin-top: 30px;
 	}
 
@@ -13,57 +12,59 @@ inner_css %}
 </style>
 {% endblock %}{% block main_content %} {% include "header.html" %}
 
-<div id="register">
-	<h2>注册</h2>
-	{% if get_flashed_messages()[0] %}
-		<div class="alert alert-primary flash-message">
-			<button type="button" class="close" data-dismiss="alert">&times;</button>
-			{{ get_flashed_messages()[0] }}
-		</div>
-	{% endif %}
-	<div id="register-form">
-		<form method="POST">
-			{{ form.hidden_tag() }}
-			{{ form.email.label(class='input-label')
-			}}<span class="text-danger"> *</span
-			>{{ form.email(class='form-control', id='register-email-input-box') }}
-			<span class="error-message">{{ form.email.errors[0] }}</span>
-			{{ form.verification_code.label(class='input-label') }}
-			<span class="text-danger"> *</span>
-			<div class="row">
-				<div class="col-8">
-					{{ form.verification_code(class='form-control') }}
-				</div>
-				<div class="col-4 offest-1">
-					<button
-						type="button"
-						id="verify_email_button"
-						class="btn btn-light"
-						onclick="verify_email()"
-					>
-						发送验证码
-					</button>
-				</div>
+<div class="background">
+	<div id="register">
+		<h2>注册</h2>
+		{% if get_flashed_messages()[0] %}
+			<div class="alert alert-primary flash-message">
+				<button type="button" class="close" data-dismiss="alert">&times;</button>
+				{{ get_flashed_messages()[0] }}
 			</div>
-			{{ form.password.label(class='input-label')
-			}}<span class="text-danger"> *</span
-			>{{ form.password(class="form-control") }}
-			<span class="error-message">{{ form.password.errors[0] }}</span>
-			{{ form.check_password.label(class='input-label')
-			}}<span class="text-danger"> *</span
-			>{{ form.check_password(class="form-control") }}
-			<span class="error-message">{{ form.check_password.errors[0] }}</span>
-			{{ form.phone_number.label(class='input-label')
-			}}{{ form.phone_number(class='form-control') }}
-			<span class="error-message">{{ form.phone_number.errors[0] }}</span>
-			{{ form.nickname.label(class='input-label')
-			}}{{ form.nickname(class='form-control') }}
-			<span class="error-message">{{ form.nickname.errors[0] }}</span>
-			{{ form.hidden_verification_code_hash(style="display: none;", id='hidden_verification_code_hash') }}
-			<p>{{ form.submit(class='submit-button btn') }} <span>已经注册？<a href="_login">立即登录 →</a></span></p>
-		</form>
+		{% endif %}
+		<div id="register-form">
+			<form method="POST">
+				{{ form.hidden_tag() }}
+				{{ form.email.label(class='input-label')
+				}}<span class="text-danger"> *</span
+				>{{ form.email(class='form-control', id='register-email-input-box') }}
+				<span class="error-message">{{ form.email.errors[0] }}</span>
+				{{ form.verification_code.label(class='input-label') }}
+				<span class="text-danger"> *</span>
+				<div class="row">
+					<div class="col-8">
+						{{ form.verification_code(class='form-control') }}
+					</div>
+					<div class="col-4 offest-1">
+						<button
+							type="button"
+							id="verify_email_button"
+							class="btn btn-light"
+							onclick="verify_email()"
+						>
+							发送验证码
+						</button>
+					</div>
+				</div>
+				{{ form.password.label(class='input-label')
+				}}<span class="text-danger"> *</span
+				>{{ form.password(class="form-control") }}
+				<span class="error-message">{{ form.password.errors[0] }}</span>
+				{{ form.check_password.label(class='input-label')
+				}}<span class="text-danger"> *</span
+				>{{ form.check_password(class="form-control") }}
+				<span class="error-message">{{ form.check_password.errors[0] }}</span>
+				{{ form.phone_number.label(class='input-label')
+				}}{{ form.phone_number(class='form-control') }}
+				<span class="error-message">{{ form.phone_number.errors[0] }}</span>
+				{{ form.nickname.label(class='input-label')
+				}}{{ form.nickname(class='form-control') }}
+				<span class="error-message">{{ form.nickname.errors[0] }}</span>
+				{{ form.hidden_verification_code_hash(style="display: none;", id='hidden_verification_code_hash') }}
+				<p>{{ form.submit(class='submit-button btn') }} <span>已经注册？<a href="_login">立即登录 →</a></span></p>
+			</form>
+		</div>
 	</div>
+	{% include "footer.html" %}
 </div>
 
-{% include "footer.html" %}
 {% endblock %}

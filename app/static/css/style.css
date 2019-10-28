@@ -137,39 +137,47 @@ button {
     line-height: 100px;
     color: white; }
 
-#login, #register {
-  width: 35%;
-  margin: 0 auto;
-  padding-top: 130px; }
-  #login h2, #register h2 {
-    font-weight: bold;
-    padding-bottom: 18px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1); }
-    #login .flash-message, #register .flash-message {
-      position: relative;
-      bottom: -20px; }
-      #login .input-label, #register .input-label {
-        margin-top: 18px;
-        margin-bottom: 7px; }
-        #login .error-message, #register .error-message {
-          font-size: 0.8em;
-          color: red;
-          display: block;
-          margin-top: 7px; }
-          #login form p, #register form p {
-            margin-top: 50px; }
-            #login .submit-button, #register .submit-button {
-              background-color: #1892c2;
-              width: 140px;
-              border-radius: 50px;
-              border-color: #1892c2;
-              color: white; }
-              #login .submit-button:focus, #login .submit-button:hover,
-              #register .submit-button:focus, #register .submit-button:hover {
-                background-color: #21cbce;
-                outline: none;
-                box-shadow: none;
-                border-color: #21cbce; }
+.background {
+  width: 100%;
+  float: left;
+  background-image: url("/static/images/background.svg");
+  background-size: cover;
+  background-position: 50%;
+  background-repeat: no-repeat; }
+
+  #login, #register {
+    width: 35%;
+    margin: 0 auto;
+    padding-top: 130px; }
+    #login h2, #register h2 {
+      font-weight: bold;
+      padding-bottom: 18px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1); }
+      #login .flash-message, #register .flash-message {
+        position: relative;
+        bottom: -20px; }
+        #login .input-label, #register .input-label {
+          margin-top: 18px;
+          margin-bottom: 7px; }
+          #login .error-message, #register .error-message {
+            font-size: 0.8em;
+            color: red;
+            display: block;
+            margin-top: 7px; }
+            #login form p, #register form p {
+              margin-top: 50px; }
+              #login .submit-button, #register .submit-button {
+                background-color: #1892c2;
+                width: 140px;
+                border-radius: 50px;
+                border-color: #1892c2;
+                color: white; }
+                #login .submit-button:focus, #login .submit-button:hover,
+                #register .submit-button:focus, #register .submit-button:hover {
+                  background-color: #21cbce;
+                  outline: none;
+                  box-shadow: none;
+                  border-color: #21cbce; }
 
 #login-form a {
   color: #1892c2; }

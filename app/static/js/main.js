@@ -1,9 +1,23 @@
+$(window).scroll(() => {
+	if ($(window).scrollTop() >= 78) {
+		if (!$("#header").hasClass("fixed-header")) {
+			$("#header").addClass("fixed-header");
+			$("#header").after('<div class="header-placeholder"></div>');
+		}
+	}
+	else {
+		if ($("#header").hasClass("fixed-header")) {
+			$("#header").removeClass("fixed-header");
+			$("#header").next().remove();
+		}
+	}
+});
+
 function toggleUserDashboard() {
 	let userDashboard = $("#header .user-dashboard");
 	if (userDashboard.hasClass("show-user-dashboard"))
 		userDashboard.removeClass("show-user-dashboard");
-	else
-		userDashboard.addClass("show-user-dashboard");
+	else userDashboard.addClass("show-user-dashboard");
 }
 
 function verify_email() {

@@ -76,55 +76,67 @@ button {
           opacity: 1;
           box-shadow: -1px 3px 3px rgba(128, 128, 128, 0.5); }
 
-#carousel-map {
-  float: left; }
+.fixed-header {
+  float: none;
+  position: fixed;
+  z-index: 10;
+  background: #fff;
+  box-shadow: 0 0 5px black; }
 
-  .function {
+  .header-placeholder {
     width: 100%;
-    float: left;
-    padding: 50px 0 70px 0;
-    text-align: center; }
-    .function h2 {
-      margin: 0 auto 30px auto; }
-      .function hr {
-        margin: 0 auto 40px auto;
-        border: 0;
-        color: #237bba;
-        background-color: #237bba;
-        height: 4px;
-        width: 60px; }
-        .function .onerow {
-          margin-left: auto;
-          margin-right: auto;
-          min-width: 800; }
-          .function .onerow > div {
-            width: 200px;
-            padding: 20px 15px;
-            margin-right: 100px;
-            display: inline-block; }
-            .function .onerow > div:last-child {
-              margin-right: 0; }
-              .function .onerow > div .icon {
-                border: 1px solid #bebebe;
-                border-radius: 50%;
-                width: 100px;
-                height: 100px;
-                margin: auto;
-                transition: all 0.5s; }
-                .function .onerow > div .icon i {
-                  color: #bebebe;
-                  font-size: 30px;
-                  line-height: 100px; }
-            .function .onerow > div h4 {
-              font-size: 1.2em;
-              margin-top: 20px; }
-              .function .onerow > div:hover .icon {
-                border-color: #237bba;
-                background-color: #237bba; }
-                .function .onerow > div:hover .icon i {
-                  color: white; }
-              .function .onerow > div:hover h4 {
-                color: #237bba; }
+    height: 78px;
+    float: left; }
+
+    #carousel-map {
+      float: left; }
+
+      .function {
+        width: 100%;
+        float: left;
+        padding: 50px 0 70px 0;
+        text-align: center; }
+        .function h2 {
+          margin: 0 auto 30px auto; }
+          .function hr {
+            margin: 0 auto 40px auto;
+            border: 0;
+            color: #237bba;
+            background-color: #237bba;
+            height: 4px;
+            width: 60px; }
+            .function .onerow {
+              margin-left: auto;
+              margin-right: auto;
+              min-width: 800; }
+              .function .onerow > div {
+                width: 200px;
+                padding: 20px 15px;
+                margin-right: 100px;
+                display: inline-block; }
+                .function .onerow > div:last-child {
+                  margin-right: 0; }
+                  .function .onerow > div .icon {
+                    border: 1px solid #bebebe;
+                    border-radius: 50%;
+                    width: 100px;
+                    height: 100px;
+                    margin: auto;
+                    transition: all 0.5s; }
+                    .function .onerow > div .icon i {
+                      color: #bebebe;
+                      font-size: 30px;
+                      line-height: 100px; }
+                .function .onerow > div h4 {
+                  font-size: 1.2em;
+                  margin-top: 20px; }
+                  .function .onerow > div:hover .icon {
+                    border-color: #237bba;
+                    background-color: #237bba; }
+                    .function .onerow > div:hover .icon i {
+                      color: white; }
+                  .function .onerow > div:hover h4 {
+                    color: #237bba; }
 
 #footer {
   width: 100%;
@@ -148,7 +160,8 @@ button {
   #login, #register {
     width: 35%;
     margin: 0 auto;
-    padding-top: 130px; }
+    padding-top: 80px;
+    clear: both; }
     #login h2, #register h2 {
       font-weight: bold;
       padding-bottom: 18px;
@@ -197,7 +210,7 @@ button {
   border-color: #1892c2;
   color: white; }
   #verify_email_button:focus, #verify_email_button:hover {
-    background-color: #69B8D7;
+    background-color: #69b8d7;
     outline: none;
     box-shadow: none;
-    border-color: #69B8D7; }
+    border-color: #69b8d7; }

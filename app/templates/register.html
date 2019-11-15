@@ -10,16 +10,17 @@ inner_css %}
 		color: #999999;
 	}
 </style>
-{% endblock %}{% block main_content %} {% include "header.html" %}
+{% endblock %}{% block main_content %}
 
 <div class="background">
+	{% include "header.html" %}
 	<div id="register">
 		<h2>注册</h2>
 		{% if get_flashed_messages()[0] %}
-			<div class="alert alert-primary flash-message">
-				<button type="button" class="close" data-dismiss="alert">&times;</button>
-				{{ get_flashed_messages()[0] }}
-			</div>
+		<div class="alert alert-primary flash-message">
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+			{{ get_flashed_messages()[0] }}
+		</div>
 		{% endif %}
 		<div id="register-form">
 			<form method="POST">
@@ -60,7 +61,10 @@ inner_css %}
 				}}{{ form.nickname(class='form-control') }}
 				<span class="error-message">{{ form.nickname.errors[0] }}</span>
 				{{ form.hidden_verification_code_hash(style="display: none;", id='hidden_verification_code_hash') }}
-				<p>{{ form.submit(class='submit-button btn') }} <span>已经注册？<a href="_login">立即登录 →</a></span></p>
+				<p>
+					{{ form.submit(class='submit-button btn') }}
+					<span>已经注册？<a href="_login">立即登录 →</a></span>
+				</p>
 			</form>
 		</div>
 	</div>

@@ -1,0 +1,10 @@
+@import "./normalize.css";
+
+a, a:hover {
+	text-decoration: none;
+	color: black;
+}
+
+button {
+	cursor: pointer;
+}

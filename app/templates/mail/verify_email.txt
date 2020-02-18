@@ -1,3 +1,0 @@
-Hi，感谢您使用我们的产品。
-
-您的邮箱验证码为 {{ verification_code }}

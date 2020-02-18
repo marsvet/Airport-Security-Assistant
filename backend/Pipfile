@@ -1,0 +1,19 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.douban.com/simple"
+verify_ssl = true
+
+[dev-packages]
+pylint = "*"
+autopep8 = "*"
+
+[packages]
+flask = "*"
+pymysql = "*"
+flask-mail = "*"
+flask-login = "*"
+requests = "*"
+lxml = "*"
+
+[requires]
+python_version = "3.6"

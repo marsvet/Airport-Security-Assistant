@@ -1,4 +1,5 @@
 import axios from "./base";
+import { apiServer } from "@/common/const.js";
 
 export function getWeather(city) {
   return axios({
@@ -14,6 +15,6 @@ export function getWeather(city) {
 
 export function getCrowdStatus() {
   return axios({
-    url: "/crowd_status"
+    url: apiServer + "/crowd_status"
   });
 }

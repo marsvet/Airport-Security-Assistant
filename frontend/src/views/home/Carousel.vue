@@ -13,16 +13,16 @@
 </template>
 
 <script>
-import { server } from "@/common/const.js";
+import { staticServer } from "@/common/const.js";
 
 export default {
   data() {
     return {
       images: [
-        { src: server + "/raw/img/slide1.jpg" },
-        { src: server + "/raw/img/slide2.jpg" },
-        { src: server + "/raw/img/slide3.jpg" },
-        { src: server + "/raw/img/slide4.jpg" }
+        { src: staticServer + "/raw/img/slide1.jpg" },
+        { src: staticServer + "/raw/img/slide2.jpg" },
+        { src: staticServer + "/raw/img/slide3.jpg" },
+        { src: staticServer + "/raw/img/slide4.jpg" }
       ]
     };
   },

@@ -11,7 +11,7 @@
       <v-row align="center">
         <v-col class="display-2" cols="6">{{ temp }}&deg;C</v-col>
         <v-col cols="6">
-          <v-img :src="server + '/raw/img/weather_icons/' + weather + '.png'" width="60"></v-img>
+          <v-img :src="staticServer + '/raw/img/weather_icons/' + weather + '.png'" width="60"></v-img>
         </v-col>
       </v-row>
     </v-card-text>
@@ -32,7 +32,7 @@
         <v-list-item-icon>
           <img
             style="width: 30px;"
-            :src="server + '/raw/img/weather_icons/' + item.weather + '.png'"
+            :src="staticServer + '/raw/img/weather_icons/' + item.weather + '.png'"
           />
         </v-list-item-icon>
 
@@ -54,7 +54,7 @@
 <script>
 import { getWeather } from "@/network/airportInfo.js";
 
-import { server } from "@/common/const.js";
+import { staticServer } from "@/common/const.js";
 
 export default {
   data() {
@@ -71,7 +71,7 @@ export default {
 
       value: "",
       loading: false,
-      server
+      staticServer
     };
   },
   methods: {

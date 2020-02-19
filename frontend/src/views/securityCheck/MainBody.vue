@@ -3,7 +3,7 @@
     <v-container class="fill-height" fluid :style="bodyStyle">
       <h1>{{ tips[tipsIndex].title }}</h1>
       <div v-if="tips[tipsIndex].image" style="width: 100%;">
-        <img :src="server + tips[tipsIndex].image" style="width: 100%;" preview />
+        <img :src="staticServer + tips[tipsIndex].image" style="width: 100%;" preview />
       </div>
       <p v-else v-for="para in tips[tipsIndex].body">{{ para }}</p>
     </v-container>
@@ -11,12 +11,12 @@
 </template>
 
 <script>
-import { server } from "@/common/const.js";
+import { staticServer } from "@/common/const.js";
 
 export default {
   data() {
     return {
-      server
+      staticServer
     };
   },
   computed: {

@@ -9,6 +9,7 @@ const Regulations = () => import("../views/regulations/Regulations");
 const Danger = () => import("../views/danger/Danger");
 const AirportInfo = () => import("../views/airportInfo/AirportInfo");
 const SecurityCheck = () => import("../views/securityCheck/SecurityCheck");
+const FlightInfo = () => import("../views/flightInfo/FlightInfo");
 
 const routes = [
   {
@@ -30,6 +31,10 @@ const routes = [
   {
     path: "/security_check",
     component: SecurityCheck
+  },
+  {
+    path: "/flight_info",
+    component: FlightInfo
   }
 ];
 

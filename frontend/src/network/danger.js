@@ -1,14 +1,15 @@
 import axios from "./base";
+import { apiServer } from "@/common/const.js";
 
 export function getAllResName() {
   return axios({
-    url: "/all_res_name"
+    url: apiServer + "/all_res_name"
   });
 }
 
 export function getResInfo(resName) {
   return axios({
-    url: "/res_info",
+    url: apiServer + "/res_info",
     method: "POST",
     data: {
       res_name: resName
@@ -18,7 +19,7 @@ export function getResInfo(resName) {
 
 export function uploadImg(form) {
   return axios({
-    url: "/res_info_by_image",
+    url: apiServer + "/res_info_by_image",
     method: "POST",
     config: {
       headers: { "Content-Type": "multipart/form-data" }

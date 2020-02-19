@@ -3,7 +3,7 @@
     <v-card :loading="loading">
       <v-row class="ma-0">
         <v-col cols="12" md="6" class="pa-0 pa-md-4">
-          <v-img contain :src="server + res.imgAddress"></v-img>
+          <v-img contain :src="staticServer + res.imgAddress"></v-img>
         </v-col>
         <v-col cols="12" md="6">
           <v-list>
@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import { server } from "@/common/const.js";
+import { staticServer } from "@/common/const.js";
 
 export default {
   props: {
@@ -53,7 +53,7 @@ export default {
   },
   data() {
     return {
-      server
+      staticServer
     };
   }
 };

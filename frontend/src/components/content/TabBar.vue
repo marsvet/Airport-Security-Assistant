@@ -16,13 +16,13 @@
       <v-tabs v-if="$vuetify.breakpoint.mdAndUp" right class="mr-6" style="width:auto;">
         <v-tab v-for="page in pages" :to="page.route">{{ page.title }}</v-tab>
       </v-tabs>
-      <v-btn
+      <!-- <v-btn
         v-if="$vuetify.breakpoint.mdAndUp"
         tile
         text
         class="subtitle-1"
         @click="$emit('showLoginDialog');"
-      >登录/注册</v-btn>
+      >登录/注册</v-btn>-->
     </v-app-bar>
 
     <!-- 手机端显示侧边导航栏 -->
@@ -32,9 +32,9 @@
       v-model="drawer"
       fixed
       temporary
-      :style="{'padding-top': tabBarHeight + 'px'}"
+      :style="{'padding-top': tabBarHeight - 8 + 'px'}"
     >
-      <v-list-item>
+      <!-- <v-list-item>
         <v-list-item-avatar>
           <v-img src="https://randomuser.me/api/portraits/men/78.jpg"></v-img>
         </v-list-item-avatar>
@@ -43,7 +43,7 @@
         </v-list-item-content>
       </v-list-item>
 
-      <v-divider></v-divider>
+      <v-divider></v-divider>-->
 
       <v-list>
         <v-list-item v-for="page in pages" :to="page.route">

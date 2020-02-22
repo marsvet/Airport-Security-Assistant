@@ -11,7 +11,7 @@
     >
       <v-app-bar-nav-icon v-if="$vuetify.breakpoint.smAndDown" @click="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title class="headline ml-0 ml-md-12 font-weight-bold">
-        <span @click="$router.push('/')" style="cursor: pointer;">CAI Service</span>
+        <span @click="$router.push('/')" style="cursor: pointer;">机场安检助手</span>
       </v-toolbar-title>
       <v-tabs v-if="$vuetify.breakpoint.mdAndUp" right class="mr-6" style="width:auto;">
         <v-tab v-for="page in pages" :to="page.route">{{ page.title }}</v-tab>
@@ -32,6 +32,7 @@
       v-model="drawer"
       fixed
       temporary
+      :style="{'padding-top': tabBarHeight + 'px'}"
     >
       <v-list-item>
         <v-list-item-avatar>
@@ -108,6 +109,11 @@
 import { tabBarHeight } from "@/common/const.js";
 
 export default {
+  data() {
+    return {
+      tabBarHeight
+    };
+  },
   methods: {
     switchCAR(index) {
       this.$store.commit("setCurrentShowedCAR", index);
@@ -161,7 +167,7 @@ export default {
         },
         {
           title: "满意度调查",
-          route: "/login",
+          route: "/satisfaction",
           icon: "mdi-comment-question-outline"
         }
       ],

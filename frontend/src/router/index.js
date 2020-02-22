@@ -10,31 +10,57 @@ const Danger = () => import("../views/danger/Danger");
 const AirportInfo = () => import("../views/airportInfo/AirportInfo");
 const SecurityCheck = () => import("../views/securityCheck/SecurityCheck");
 const FlightInfo = () => import("../views/flightInfo/FlightInfo");
+const Satisfaction = () => import("../views/satisfaction/Satisfaction");
 
 const routes = [
   {
     path: "/",
-    component: Home
+    component: Home,
+    meta: {
+      title: "机场安检助手"
+    }
   },
   {
     path: "/regulations",
-    component: Regulations
+    component: Regulations,
+    meta: {
+      title: "民航法规 - 机场安检助手"
+    }
   },
   {
     path: "/danger",
-    component: Danger
+    component: Danger,
+    meta: {
+      title: "危险物品 - 机场安检助手"
+    }
   },
   {
     path: "/airport_info",
-    component: AirportInfo
+    component: AirportInfo,
+    meta: {
+      title: "机场信息 - 机场安检助手"
+    }
   },
   {
     path: "/security_check",
-    component: SecurityCheck
+    component: SecurityCheck,
+    meta: {
+      title: "安检须知 - 机场安检助手"
+    }
   },
   {
     path: "/flight_info",
-    component: FlightInfo
+    component: FlightInfo,
+    meta: {
+      title: "航班查询 - 机场安检助手"
+    }
+  },
+  {
+    path: "/satisfaction",
+    component: Satisfaction,
+    meta: {
+      title: "满意度调查 - 机场安检助手"
+    }
   }
 ];
 

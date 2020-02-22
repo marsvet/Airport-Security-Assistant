@@ -21,14 +21,14 @@ export default {
     return {
       pages: [
         {
-          title: "机场信息",
-          route: "/airport_info",
-          icon: "mdi-airport"
-        },
-        {
           title: "航班查询",
           route: "/flight_info",
           icon: "mdi-airplane"
+        },
+        {
+          title: "机场信息",
+          route: "/airport_info",
+          icon: "mdi-airport"
         },
         {
           title: "安检须知",
@@ -47,7 +47,7 @@ export default {
         },
         {
           title: "满意度调查",
-          route: "/login",
+          route: "/satisfaction",
           icon: "mdi-comment-question-outline"
         }
       ]

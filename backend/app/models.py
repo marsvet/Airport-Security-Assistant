@@ -1,14 +1,16 @@
 # -*-coding:utf-8-*-
-from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
-from app import db, login_manager
+from app import db
 
 
-class User(UserMixin):
-    def __init__(self):
+class User:
+    def __init__(self, key=None, value=None):
         db.ping(reconnect=True)
         self.cursor = db.cursor()
-        self.__set_attr(0)
+        if key is None or value is None:
+            self.__set_attr(0)
+        else:
+            self.get_user(key, value)
 
     def __del__(self):
         self.cursor.close()
@@ -62,14 +64,7 @@ class User(UserMixin):
         return check_password_hash(self.password_hash, password)
 
 
-@login_manager.user_loader
-def load_user(user_id):
-    user = User()
-    user.get_user("user_id", user_id)
-    return user
-
-
-class Res():
+class Res:
     def __init__(self):
         db.ping(reconnect=True)
         self.cursor = db.cursor()
@@ -97,7 +92,7 @@ class Res():
         return res_names
 
 
-class City_code():
+class City_code:
     def __init__(self):
         db.ping(reconnect=True)
         self.cursor = db.cursor()

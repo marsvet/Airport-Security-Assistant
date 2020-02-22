@@ -47,7 +47,6 @@
               :loading="placePickerLoading"
               v-model="source"
               :items="placeItems"
-              clearable
               label="起飞地"
               no-data-text="未找到该城市"
             ></v-autocomplete>
@@ -60,7 +59,6 @@
               :loading="placePickerLoading"
               v-model="destination"
               :items="placeItems"
-              clearable
               label="目的地"
               no-data-text="未找到该城市"
             ></v-autocomplete>

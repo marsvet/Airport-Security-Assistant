@@ -1,6 +1,6 @@
 {
-  "name": "security-assistant",
-  "version": "0.1.0",
+  "name": "airport-security-assistant",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
